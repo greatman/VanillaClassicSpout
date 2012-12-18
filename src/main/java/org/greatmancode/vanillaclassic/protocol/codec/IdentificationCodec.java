@@ -42,7 +42,7 @@ public final class IdentificationCodec extends MessageCodec<IdentificationMessag
 
 	@Override
 	public IdentificationMessage decode(ChannelBuffer buffer) throws IOException {
-		short protocolVersion = buffer.readUnsignedByte();
+		byte protocolVersion = buffer.readByte();
 		String username = ChannelBufferUtils.readString(buffer);
 		String verificationKey = ChannelBufferUtils.readString(buffer);
 		buffer.readUnsignedByte();

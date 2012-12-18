@@ -37,4 +37,8 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 	public VanillaClassicSynchronizer(Session session, int minViewDistance) {
 		super(session, minViewDistance);
 	}
+	
+	public void sendMap() {
+		
+	}
 }

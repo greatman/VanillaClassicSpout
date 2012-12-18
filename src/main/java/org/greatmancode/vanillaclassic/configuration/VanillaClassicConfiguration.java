@@ -32,10 +32,17 @@ import java.util.logging.Level;
 import org.greatmancode.vanillaclassic.VanillaClassicPlugin;
 
 import org.spout.api.exception.ConfigurationException;
+import org.spout.api.util.config.ConfigurationHolder;
 import org.spout.api.util.config.ConfigurationHolderConfiguration;
 import org.spout.api.util.config.yaml.YamlConfiguration;
 
 public class VanillaClassicConfiguration extends ConfigurationHolderConfiguration {
+	
+	public static final ConfigurationHolder SERVER_NAME = new ConfigurationHolder(true, "general", "server-name");
+	public static final ConfigurationHolder MOTD = new ConfigurationHolder(true, "general", "motd");
+	
+	public static final WorldConfiguration WORLDS = new WorldConfiguration(VanillaClassicPlugin.getInstance().getDataFolder());
+	
 	public VanillaClassicConfiguration(File dataFolder) {
 		super(new YamlConfiguration(new File(dataFolder, "config.yml")));
 	}
@@ -43,8 +50,11 @@ public class VanillaClassicConfiguration extends ConfigurationHolderConfiguratio
 	@Override
 	public void load() {
 		try {
+			WORLDS.load();
+			WORLDS.save();
 			super.load();
 			super.save();
+			
 		} catch (ConfigurationException e) {
 			VanillaClassicPlugin.getInstance().getLogger().log(Level.WARNING, "Error loading VanillaClassic configuration: ", e);
 		}
@@ -53,6 +63,7 @@ public class VanillaClassicConfiguration extends ConfigurationHolderConfiguratio
 	@Override
 	public void save() {
 		try {
+			WORLDS.save();
 			super.save();
 		} catch (ConfigurationException e) {
 			VanillaClassicPlugin.getInstance().getLogger().log(Level.WARNING, "Error saving VanillaClassic configuration: ", e);

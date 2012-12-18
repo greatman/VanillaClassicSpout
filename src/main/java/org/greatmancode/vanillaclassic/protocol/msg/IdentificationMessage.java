@@ -28,17 +28,17 @@ package org.greatmancode.vanillaclassic.protocol.msg;
 
 public class IdentificationMessage extends VanillaClassicMessage {
 	private final byte userType;
-	private final short protocolVersion;
+	private final byte protocolVersion;
 	private final String verificationKeyOrServerMOTD, usernameOrServerName;
 
-	public IdentificationMessage(short protocolVersion, String usernameOrServerName, String verificationKeyOrServerMOTD, byte userType) {
+	public IdentificationMessage(byte protocolVersion, String usernameOrServerName, String verificationKeyOrServerMOTD, byte userType) {
 		this.protocolVersion = protocolVersion;
 		this.usernameOrServerName = usernameOrServerName;
 		this.verificationKeyOrServerMOTD = verificationKeyOrServerMOTD;
 		this.userType = userType;
 	}
 
-	public short getProtocolVersion() {
+	public byte getProtocolVersion() {
 		return protocolVersion;
 	}
 

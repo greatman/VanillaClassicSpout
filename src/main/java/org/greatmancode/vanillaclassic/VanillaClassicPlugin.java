@@ -30,6 +30,7 @@ import org.greatmancode.vanillaclassic.configuration.VanillaClassicConfiguration
 import org.greatmancode.vanillaclassic.protocol.VanillaClassicProtocol;
 
 import org.spout.api.plugin.CommonPlugin;
+import org.spout.api.plugin.Platform;
 import org.spout.api.protocol.Protocol;
 
 public class VanillaClassicPlugin extends CommonPlugin {
@@ -39,6 +40,19 @@ public class VanillaClassicPlugin extends CommonPlugin {
 	@Override
 	public void onEnable() {
 		config.load();
+		
+		//Commands
+		
+		if (getEngine().debugMode() || getEngine().getPlatform() == Platform.SERVER) {
+			setupWorlds();
+		}
+		
+		getLogger().info("v" + getDescription().getVersion() + " enabled. Protocol: " + getDescription().getData("protocol"));
+	}
+
+	private void setupWorlds() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
