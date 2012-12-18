@@ -26,11 +26,17 @@
  */
 package org.greatmancode.vanillaclassic.protocol;
 
+import org.greatmancode.vanillaclassic.protocol.handler.IdentificationHandler;
+import org.greatmancode.vanillaclassic.protocol.msg.IdentificationMessage;
 import org.spout.api.protocol.HandlerLookupService;
 
 public class VanillaClassicHandlerLookupService extends HandlerLookupService {
 
 	public VanillaClassicHandlerLookupService() {
-		bind(null, null);
+		try {
+			bind(IdentificationMessage.class, IdentificationHandler.class);
+		} catch (Exception ex) {
+			throw new ExceptionInInitializerError(ex);
+		}
 	}
 }

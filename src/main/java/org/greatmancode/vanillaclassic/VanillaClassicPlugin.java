@@ -35,7 +35,7 @@ public class VanillaClassicPlugin extends CommonPlugin {
 
 	private static VanillaClassicPlugin instance;
 	private VanillaClassicConfiguration config;
-
+	public static final String salt = "98h87qwdgauisgd87asd"; //TODO: Need to random that
 	@Override
 	public void onEnable() {
 		config.load();
