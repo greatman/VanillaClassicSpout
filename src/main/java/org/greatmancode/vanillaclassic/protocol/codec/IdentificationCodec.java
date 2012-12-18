@@ -25,10 +25,10 @@ public final class IdentificationCodec extends MessageCodec<IdentificationMessag
 	@Override
 	public ChannelBuffer encode(IdentificationMessage message) throws IOException {
 		ChannelBuffer buffer = ChannelBuffers.buffer(130);
-		buffer.writeShort(message.getProtocolVersion());
+		buffer.writeByte(message.getProtocolVersion());
 		ChannelBufferUtils.writeString(buffer, message.getUsernameOrServerName());
 		ChannelBufferUtils.writeString(buffer, message.getVerificationKeyOrServerMOTD());
-		buffer.writeShort(message.getUserType());
+		buffer.writeByte(message.getUserType());
 		return buffer;
 	}
 }
