@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -27,7 +27,6 @@
 package org.greatmancode.vanillaclassic.protocol.msg;
 
 public class UpdateUserTypeMessage extends VanillaClassicMessage {
-
 	private final byte userType;
 
 	public UpdateUserTypeMessage(byte userType) {

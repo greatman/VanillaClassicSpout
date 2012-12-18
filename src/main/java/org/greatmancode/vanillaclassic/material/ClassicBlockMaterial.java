@@ -24,33 +24,19 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package org.greatmancode.vanillaclassic.protocol.msg;
+package org.greatmancode.vanillaclassic.material;
 
-public class IdentificationMessage extends VanillaClassicMessage {
-	private final byte userType;
-	private final short protocolVersion;
-	private final String verificationKeyOrServerMOTD, usernameOrServerName;
+import org.spout.api.material.BlockMaterial;
 
-	public IdentificationMessage(short protocolVersion, String usernameOrServerName, String verificationKeyOrServerMOTD, byte userType) {
-		this.protocolVersion = protocolVersion;
-		this.usernameOrServerName = usernameOrServerName;
-		this.verificationKeyOrServerMOTD = verificationKeyOrServerMOTD;
-		this.userType = userType;
+/**
+ * Represents a classic BlockMaterial
+ */
+public class ClassicBlockMaterial extends BlockMaterial {
+	protected ClassicBlockMaterial(String name, short id) {
+		super(name, id);
 	}
 
-	public short getProtocolVersion() {
-		return protocolVersion;
-	}
-
-	public byte getUserType() {
-		return userType;
-	}
-
-	public String getVerificationKeyOrServerMOTD() {
-		return verificationKeyOrServerMOTD;
-	}
-
-	public String getUsernameOrServerName() {
-		return usernameOrServerName;
+	public int getClassicId() {
+		return 0; //TODO Do this greatman
 	}
 }
