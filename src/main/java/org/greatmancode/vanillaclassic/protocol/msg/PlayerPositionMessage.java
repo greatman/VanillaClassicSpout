@@ -26,12 +26,12 @@
  */
 package org.greatmancode.vanillaclassic.protocol.msg;
 
-public class PositionMessage extends VanillaClassicMessage {
+public class PlayerPositionMessage extends VanillaClassicMessage {
 
-	private final byte playerID, yaw, pitch;
-	private final short x, y, z;
-
-	public PositionMessage(byte playerID, short x, short y, short z, byte yaw, byte pitch) {
+	private final byte yaw, pitch;
+	private final short x, y, z, playerID;
+	
+	public PlayerPositionMessage(short playerID, short x, short y, short z, byte yaw, byte pitch) {
 		this.playerID = playerID;
 		this.x = x;
 		this.y = y;
@@ -40,7 +40,7 @@ public class PositionMessage extends VanillaClassicMessage {
 		this.pitch = pitch;
 	}
 
-	public byte getPlayerID() {
+	public short getPlayerID() {
 		return playerID;
 	}
 

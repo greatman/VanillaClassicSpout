@@ -26,12 +26,19 @@
  */
 package org.greatmancode.vanillaclassic.protocol;
 
+import org.greatmancode.vanillaclassic.protocol.codec.DespawnPlayerCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.DisconnectPlayerCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.IdentificationCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.LevelDataChunkCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.LevelFinalizeCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.LevelInitializeCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.PingCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.PlayerMessageCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.PlayerPositionCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.SetBlockClientCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.SetBlockServerCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.SpawnPlayerCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.UpdateUserTypeCodec;
 import org.spout.api.protocol.CodecLookupService;
 
 public class VanillaClassicCodecLookupService extends CodecLookupService {
@@ -64,7 +71,7 @@ public class VanillaClassicCodecLookupService extends CodecLookupService {
 			/* 0x0c */
 			bind(DespawnPlayerCodec.class);
 			/* 0x0d */
-			bind(MessageCodec.class);
+			bind(PlayerMessageCodec.class);
 			/* 0x0e */
 			bind(DisconnectPlayerCodec.class);
 			/* 0x0f */

@@ -26,17 +26,17 @@
  */
 package org.greatmancode.vanillaclassic.protocol.msg;
 
-public class MessageMessage extends VanillaClassicMessage {
+public class PlayerMessageMessage extends VanillaClassicMessage {
 
-	private final byte playerID;
+	private final short playerID;
 	private final String message;
 
-	public MessageMessage(byte playerID, String message) {
+	public PlayerMessageMessage(short playerID, String message) {
 		this.playerID = playerID;
 		this.message = message;
 	}
 
-	public byte getPlayerID() {
+	public short getPlayerID() {
 		return playerID;
 	}
 
