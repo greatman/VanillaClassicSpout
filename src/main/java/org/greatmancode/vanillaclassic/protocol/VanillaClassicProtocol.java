@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@
 package org.greatmancode.vanillaclassic.protocol;
 
 import org.jboss.netty.buffer.ChannelBuffer;
+
 import org.spout.api.chat.ChatArguments;
 import org.spout.api.command.Command;
 import org.spout.api.exception.UnknownPacketException;
@@ -36,7 +37,6 @@ import org.spout.api.protocol.Protocol;
 import org.spout.api.protocol.Session;
 
 public class VanillaClassicProtocol extends Protocol {
-
 	public final static int DEFAULT_PORT = 25565;
 
 	public VanillaClassicProtocol() {
@@ -78,5 +78,4 @@ public class VanillaClassicProtocol extends Protocol {
 		// TODO Auto-generated method stub
 
 	}
-
 }

@@ -24,33 +24,13 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package org.greatmancode.vanillaclassic.protocol.msg;
+package org.greatmancode.vanillaclassic.material;
 
-public class IdentificationMessage extends VanillaClassicMessage {
-	private final byte userType;
-	private final short protocolVersion;
-	private final String verificationKeyOrServerMOTD, usernameOrServerName;
+import org.greatmancode.vanillaclassic.material.basic.Air;
 
-	public IdentificationMessage(short protocolVersion, String usernameOrServerName, String verificationKeyOrServerMOTD, byte userType) {
-		this.protocolVersion = protocolVersion;
-		this.usernameOrServerName = usernameOrServerName;
-		this.verificationKeyOrServerMOTD = verificationKeyOrServerMOTD;
-		this.userType = userType;
-	}
-
-	public short getProtocolVersion() {
-		return protocolVersion;
-	}
-
-	public byte getUserType() {
-		return userType;
-	}
-
-	public String getVerificationKeyOrServerMOTD() {
-		return verificationKeyOrServerMOTD;
-	}
-
-	public String getUsernameOrServerName() {
-		return usernameOrServerName;
-	}
+/**
+ * Holds all the materials found in the classic game.
+ */
+public class VanillaClassicMaterials {
+	public static final Air AIR = new Air();
 }

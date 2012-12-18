@@ -26,31 +26,40 @@
  */
 package org.greatmancode.vanillaclassic.protocol.msg;
 
-public class IdentificationMessage extends VanillaClassicMessage {
-	private final byte userType;
-	private final short protocolVersion;
-	private final String verificationKeyOrServerMOTD, usernameOrServerName;
+public class PositionMessage extends VanillaClassicMessage {
+	private final byte playerID, yaw, pitch;
+	private final short x, y, z;
 
-	public IdentificationMessage(short protocolVersion, String usernameOrServerName, String verificationKeyOrServerMOTD, byte userType) {
-		this.protocolVersion = protocolVersion;
-		this.usernameOrServerName = usernameOrServerName;
-		this.verificationKeyOrServerMOTD = verificationKeyOrServerMOTD;
-		this.userType = userType;
+	public PositionMessage(byte playerID, short x, short y, short z, byte yaw, byte pitch) {
+		this.playerID = playerID;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.yaw = yaw;
+		this.pitch = pitch;
 	}
 
-	public short getProtocolVersion() {
-		return protocolVersion;
+	public short getPlayerID() {
+		return playerID;
 	}
 
-	public byte getUserType() {
-		return userType;
+	public byte getYaw() {
+		return yaw;
 	}
 
-	public String getVerificationKeyOrServerMOTD() {
-		return verificationKeyOrServerMOTD;
+	public byte getPitch() {
+		return pitch;
 	}
 
-	public String getUsernameOrServerName() {
-		return usernameOrServerName;
+	public short getX() {
+		return x;
+	}
+
+	public short getY() {
+		return y;
+	}
+
+	public short getZ() {
+		return z;
 	}
 }

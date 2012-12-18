@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -24,24 +24,22 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package org.greatmancode.vanillaclassic.protocol.msg;
+package org.greatmancode.vanillaclassic.material.basic;
 
-public class PlayerMessageMessage extends VanillaClassicMessage {
+import org.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 
-	private final short playerID;
-	private final String message;
+import org.spout.api.material.BlockMaterial;
 
-	public PlayerMessageMessage(short playerID, String message) {
-		this.playerID = playerID;
-		this.message = message;
+/**
+ * Bridge SpoutAPI's AIR to a ClassicBlockMaterial
+ */
+public class Air extends ClassicBlockMaterial {
+	public Air() {
+		super(BlockMaterial.AIR.getName(), BlockMaterial.AIR.getId());
 	}
 
-	public short getPlayerID() {
-		return playerID;
+	@Override
+	public int getClassicId() {
+		return 0; //TODO Put the right value here greatman
 	}
-
-	public String getMessage() {
-		return message;
-	}
-
 }

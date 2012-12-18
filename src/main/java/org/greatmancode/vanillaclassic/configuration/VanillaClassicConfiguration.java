@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -30,12 +30,12 @@ import java.io.File;
 import java.util.logging.Level;
 
 import org.greatmancode.vanillaclassic.VanillaClassicPlugin;
+
 import org.spout.api.exception.ConfigurationException;
 import org.spout.api.util.config.ConfigurationHolderConfiguration;
 import org.spout.api.util.config.yaml.YamlConfiguration;
 
 public class VanillaClassicConfiguration extends ConfigurationHolderConfiguration {
-
 	public VanillaClassicConfiguration(File dataFolder) {
 		super(new YamlConfiguration(new File(dataFolder, "config.yml")));
 	}
@@ -47,7 +47,6 @@ public class VanillaClassicConfiguration extends ConfigurationHolderConfiguratio
 			super.save();
 		} catch (ConfigurationException e) {
 			VanillaClassicPlugin.getInstance().getLogger().log(Level.WARNING, "Error loading VanillaClassic configuration: ", e);
-
 		}
 	}
 

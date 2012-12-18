@@ -2,18 +2,18 @@ package org.greatmancode.vanillaclassic.protocol.codec;
 
 import java.io.IOException;
 
-import org.greatmancode.vanillaclassic.protocol.msg.PlayerPositionMessage;
+import org.greatmancode.vanillaclassic.protocol.msg.PositionMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 
-public final class PlayerPositionCodec extends MessageCodec<PlayerPositionMessage> {
+public final class PlayerPositionCodec extends MessageCodec<PositionMessage> {
 	public PlayerPositionCodec() {
-		super(PlayerPositionMessage.class, 0x09);
+		super(PositionMessage.class, 0x09);
 	}
 
 	@Override
-	public PlayerPositionMessage decode(ChannelBuffer buffer) throws IOException {
+	public PositionMessage decode(ChannelBuffer buffer) throws IOException {
 		short playerID = buffer.readUnsignedByte();
 		short x = buffer.readShort();
 		short y = buffer.readShort();
@@ -21,11 +21,11 @@ public final class PlayerPositionCodec extends MessageCodec<PlayerPositionMessag
 		byte yaw = buffer.readByte();
 		byte pitch = buffer.readByte();
 		
-		return new PlayerPositionMessage(playerID, x, y, z, yaw, pitch);
+		return new PositionMessage(playerID, x, y, z, yaw, pitch);
 	}
 
 	@Override
-	public ChannelBuffer encode(PlayerPositionMessage message) throws IOException {
+	public ChannelBuffer encode(PositionMessage message) throws IOException {
 		ChannelBuffer buffer = ChannelBuffers.buffer(9);
 		buffer.writeByte(message.getPlayerID());
 		buffer.writeShort(message.getX());
