@@ -1,6 +1,6 @@
-What is Vanilla?
+What is VanillaClassic?
 ----------------
-Vanilla is a plugin for the Spout platform that provides vanilla Minecraft Classic functionality and gameplay.
+VanillaClassic is a plugin for the Spout platform that provides vanilla Minecraft Classic functionality and gameplay.
 
 Copyright (c) 2011-2012, Greatman & Contributors
 
@@ -19,11 +19,11 @@ View the latest [Javadoc].
 
 License
 -------
-Vanilla is licensed under the [GNU Lesser General Public License Version 3][License], but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
+VanillaClassic is licensed under the [GNU Lesser General Public License Version 3][License], but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
 
 Compiling
 ---------
-Vanilla uses Maven to handle its dependencies.
+VanillaClassic uses Maven to handle its dependencies.
 
 * Install [Maven 2 or 3](http://maven.apache.org/download.html)  
 * Checkout this repo and run: `mvn clean install`
