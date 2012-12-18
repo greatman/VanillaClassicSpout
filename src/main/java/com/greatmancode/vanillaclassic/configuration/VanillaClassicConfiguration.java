@@ -39,8 +39,9 @@ import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 
 public class VanillaClassicConfiguration extends ConfigurationHolderConfiguration {
 	
-	public static final ConfigurationHolder SERVER_NAME = new ConfigurationHolder(true, "general", "server-name");
-	public static final ConfigurationHolder MOTD = new ConfigurationHolder(true, "general", "motd");
+	public static final ConfigurationHolder SERVER_NAME = new ConfigurationHolder("Spout Server", "general", "server-name");
+	public static final ConfigurationHolder MOTD = new ConfigurationHolder("Default MOTD", "general", "motd");
+	public static final ConfigurationHolder PUBLIC = new ConfigurationHolder(true, "general", "public");
 	
 	public static final WorldConfiguration WORLDS = new WorldConfiguration(VanillaClassicPlugin.getInstance().getDataFolder());
 	

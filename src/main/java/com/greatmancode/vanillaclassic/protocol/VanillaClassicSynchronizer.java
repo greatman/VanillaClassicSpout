@@ -34,7 +34,7 @@ import org.spout.api.protocol.event.ProtocolEventListener;
  * Synchronizes the game between multiple classic clients
  */
 public class VanillaClassicSynchronizer extends NetworkSynchronizer implements ProtocolEventListener {
-	public VanillaClassicSynchronizer(Session session, int minViewDistance) {
-		super(session, minViewDistance);
+	public VanillaClassicSynchronizer(Session session) {
+		super(session, 2);
 	}
 }

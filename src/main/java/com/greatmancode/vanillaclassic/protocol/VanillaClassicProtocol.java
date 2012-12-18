@@ -27,6 +27,7 @@
 package com.greatmancode.vanillaclassic.protocol;
 
 import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffers;
 
 import org.spout.api.chat.ChatArguments;
 import org.spout.api.command.Command;
@@ -35,6 +36,9 @@ import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageCodec;
 import org.spout.api.protocol.Protocol;
 import org.spout.api.protocol.Session;
+
+import com.greatmancode.vanillaclassic.protocol.msg.DisconnectPlayerMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.MessageMessage;
 
 public class VanillaClassicProtocol extends Protocol {
 	public final static int DEFAULT_PORT = 25565;
@@ -45,26 +49,35 @@ public class VanillaClassicProtocol extends Protocol {
 
 	@Override
 	public MessageCodec<?> readHeader(ChannelBuffer buf) throws UnknownPacketException {
-		// TODO Auto-generated method stub
-		return null;
+		int opcode = buf.readUnsignedByte();
+		MessageCodec<?> codec = getCodecLookupService().find(opcode);
+		if (codec == null) {
+			throw new UnknownPacketException(opcode);
+		}
+		return codec;
 	}
 
 	@Override
 	public ChannelBuffer writeHeader(MessageCodec<?> codec, ChannelBuffer data) {
-		// TODO Auto-generated method stub
-		return null;
+		ChannelBuffer buffer = ChannelBuffers.buffer(1);
+		buffer.writeByte(codec.getOpcode());
+		return buffer;
 	}
 
 	@Override
 	public Message getKickMessage(ChatArguments message) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DisconnectPlayerMessage(message.toString());
 	}
 
 	@Override
-	public Message getCommandMessage(Command command, ChatArguments arguments) {
-		// TODO Auto-generated method stub
-		return null;
+	public Message getCommandMessage(Command command, ChatArguments args) {
+		if (command.getPreferredName().equals("kick")) {
+			return getKickMessage(args);
+		} else if (command.getPreferredName().equals("say")) {
+			return new MessageMessage((short) 0, args.asString() + "\u00a7r"); // The reset text is a workaround for a change in 1.3 -- Remove if fixed
+		} else {
+			return new MessageMessage((short) 0, '/' + command.getPreferredName() + ' ' + args.asString());
+		}
 	}
 
 	@Override
@@ -75,7 +88,6 @@ public class VanillaClassicProtocol extends Protocol {
 
 	@Override
 	public void initializeSession(Session session) {
-		// TODO Auto-generated method stub
-
+		session.setNetworkSynchronizer(new VanillaClassicSynchronizer(session));
 	}
 }
