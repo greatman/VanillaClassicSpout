@@ -1,5 +1,8 @@
 package org.greatmancode.vanillaclassic.protocol;
 
+import org.greatmancode.vanillaclassic.protocol.codec.IdentificationCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.LevelInitializeCodec;
+import org.greatmancode.vanillaclassic.protocol.codec.PingCodec;
 import org.spout.api.protocol.CodecLookupService;
 
 public class VanillaClassicCodecLookupService extends CodecLookupService {
