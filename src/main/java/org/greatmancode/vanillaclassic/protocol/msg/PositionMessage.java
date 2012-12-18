@@ -27,10 +27,10 @@
 package org.greatmancode.vanillaclassic.protocol.msg;
 
 public class PositionMessage extends VanillaClassicMessage {
-	private final byte playerID, yaw, pitch;
-	private final short x, y, z;
+	private final byte yaw, pitch;
+	private final short x, y, z, playerID;
 
-	public PositionMessage(byte playerID, short x, short y, short z, byte yaw, byte pitch) {
+	public PositionMessage(short playerID, short x, short y, short z, byte yaw, byte pitch) {
 		this.playerID = playerID;
 		this.x = x;
 		this.y = y;
