@@ -33,8 +33,8 @@ public class IdentificationMessage extends VanillaClassicMessage {
 
 	public IdentificationMessage(byte protocolVersion, String usernameOrServerName, String verificationKeyOrServerMOTD, byte userType) {
 		this.protocolVersion = protocolVersion;
-		this.usernameOrServerName = usernameOrServerName;
-		this.verificationKeyOrServerMOTD = verificationKeyOrServerMOTD;
+		this.usernameOrServerName = usernameOrServerName.trim();
+		this.verificationKeyOrServerMOTD = verificationKeyOrServerMOTD.trim();
 		this.userType = userType;
 	}
 
