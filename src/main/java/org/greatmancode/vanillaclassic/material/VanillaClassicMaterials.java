@@ -27,10 +27,24 @@
 package org.greatmancode.vanillaclassic.material;
 
 import org.greatmancode.vanillaclassic.material.basic.Air;
+import org.greatmancode.vanillaclassic.material.basic.Bedrock;
+import org.greatmancode.vanillaclassic.material.basic.CobbleStone;
+import org.greatmancode.vanillaclassic.material.basic.Dirt;
+import org.greatmancode.vanillaclassic.material.basic.Grass;
+import org.greatmancode.vanillaclassic.material.basic.Sapling;
+import org.greatmancode.vanillaclassic.material.basic.Stone;
+import org.greatmancode.vanillaclassic.material.basic.WoodenPlank;
 
 /**
  * Holds all the materials found in the classic game.
  */
 public class VanillaClassicMaterials {
 	public static final Air AIR = new Air();
+	public static final Stone STONE = new Stone();
+	public static final Grass GRASS = new Grass();
+	public static final Dirt DIRT = new Dirt();
+	public static final CobbleStone COBBLESTONE = new CobbleStone();
+	public static final WoodenPlank WOODEN_PLANK = new WoodenPlank();
+	public static final Sapling SAPLING = new Sapling();
+	public static final Bedrock BEDROCK = new Bedrock();
 }

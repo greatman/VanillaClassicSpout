@@ -34,12 +34,8 @@ import org.spout.api.material.BlockMaterial;
  * Bridge SpoutAPI's AIR to a ClassicBlockMaterial
  */
 public class Air extends ClassicBlockMaterial {
+
 	public Air() {
 		super(BlockMaterial.AIR.getName(), BlockMaterial.AIR.getId());
-	}
-
-	@Override
-	public int getClassicId() {
-		return 0; //TODO Put the right value here greatman
 	}
 }

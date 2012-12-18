@@ -31,12 +31,13 @@ import org.spout.api.material.BlockMaterial;
 /**
  * Represents a classic BlockMaterial
  */
-public class ClassicBlockMaterial extends BlockMaterial {
-	protected ClassicBlockMaterial(String name, short id) {
+public abstract class ClassicBlockMaterial extends BlockMaterial {
+	
+	public ClassicBlockMaterial(String name, short id) {
 		super(name, id);
 	}
 
-	public int getClassicId() {
-		return 0; //TODO Do this greatman
+	public byte getClassicId() {
+		return (byte) this.getId();
 	}
 }

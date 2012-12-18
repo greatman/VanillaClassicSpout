@@ -38,17 +38,11 @@ import org.spout.api.util.config.yaml.YamlConfiguration;
 public class WorldConfiguration extends YamlConfiguration {
 	private final Map<String, WorldConfigurationNode> worldNodes = new HashMap<String, WorldConfigurationNode>();
 	public static WorldConfigurationNode NORMAL;
-	public static WorldConfigurationNode FLAT;
-	public static WorldConfigurationNode NETHER;
-	public static WorldConfigurationNode END;
 
 	public WorldConfiguration(File dataFolder) {
 		super(new File(dataFolder, "worlds.yml"));
 		//TODO: Allow the creation of sub-sections for configuration holders
 		NORMAL = get("world").setDefaults("normal", "normal");
-		FLAT = get("world_flat").setDefaults("normal", "flat");
-		NETHER = get("world_nether").setDefaults("nether", "nether");
-		END = get("world_the_end").setDefaults("the_end", "the_end");
 	}
 
 	public Collection<WorldConfigurationNode> getAll() {

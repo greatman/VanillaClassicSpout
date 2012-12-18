@@ -26,9 +26,19 @@
  */
 package org.greatmancode.vanillaclassic;
 
-import org.greatmancode.vanillaclassic.configuration.VanillaClassicConfiguration;
-import org.greatmancode.vanillaclassic.protocol.VanillaClassicProtocol;
+import java.util.ArrayList;
 
+import org.greatmancode.vanillaclassic.configuration.VanillaClassicConfiguration;
+import org.greatmancode.vanillaclassic.configuration.WorldConfigurationNode;
+import org.greatmancode.vanillaclassic.protocol.VanillaClassicProtocol;
+import org.greatmancode.vanillaclassic.world.generator.VanillaClassicGenerator;
+import org.greatmancode.vanillaclassic.world.generator.VanillaClassicGenerators;
+
+import org.spout.api.geo.World;
+import org.spout.api.geo.discrete.Point;
+import org.spout.api.geo.discrete.Transform;
+import org.spout.api.math.Quaternion;
+import org.spout.api.math.Vector3;
 import org.spout.api.plugin.CommonPlugin;
 import org.spout.api.plugin.Platform;
 import org.spout.api.protocol.Protocol;
@@ -51,7 +61,20 @@ public class VanillaClassicPlugin extends CommonPlugin {
 	}
 
 	private void setupWorlds() {
-		// TODO Auto-generated method stub
+		for (WorldConfigurationNode worldNode : VanillaClassicConfiguration.WORLDS.getAll()) {
+			if (worldNode.LOAD.getBoolean()) {
+				String generatorName = worldNode.GENERATOR.getString();
+				VanillaClassicGenerator generator = VanillaClassicGenerators.byName(generatorName);
+				if (generator == null) {
+					throw new IllegalArgumentException("Invalid generator name for world '" + worldNode.getWorldName() + "': " + generatorName);
+				}
+				World world = getEngine().loadWorld(worldNode.getWorldName(), generator);
+				
+				if (world.getAge() <= 0) {
+					world.setSpawnPoint(new Transform(new Point(generator.getSafeSpawn(world)), Quaternion.IDENTITY, Vector3.ONE));
+				}
+			}
+		}
 		
 	}
 
