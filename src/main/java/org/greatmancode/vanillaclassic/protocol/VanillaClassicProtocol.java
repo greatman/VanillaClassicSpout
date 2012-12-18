@@ -38,9 +38,11 @@ import org.spout.api.protocol.Session;
 public class VanillaClassicProtocol extends Protocol {
 
 	public final static int DEFAULT_PORT = 25565;
+
 	public VanillaClassicProtocol() {
 		super("VanillaClassic", 25565, new VanillaClassicCodecLookupService(), new VanillaClassicHandlerLookupService());
 	}
+
 	@Override
 	public MessageCodec<?> readHeader(ChannelBuffer buf) throws UnknownPacketException {
 		// TODO Auto-generated method stub

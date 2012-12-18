@@ -34,7 +34,7 @@ import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 
 public final class SetBlockServerCodec extends MessageCodec<SetBlockServerMessage> {
-	
+
 	public SetBlockServerCodec() {
 		super(SetBlockServerMessage.class, 0x06);
 	}

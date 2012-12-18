@@ -47,18 +47,18 @@ public class VanillaClassicPlugin extends CommonPlugin {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public void onLoad() {
 		instance = this;
 		config = new VanillaClassicConfiguration(getDataFolder());
 		Protocol.registerProtocol(new VanillaClassicProtocol());
 	}
-	
+
 	public static VanillaClassicPlugin getInstance() {
 		return instance;
 	}
-	
+
 	public VanillaClassicConfiguration getConfig() {
 		return config;
 	}

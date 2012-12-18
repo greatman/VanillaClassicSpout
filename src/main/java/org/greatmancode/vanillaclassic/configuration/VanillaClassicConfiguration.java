@@ -39,19 +39,18 @@ public class VanillaClassicConfiguration extends ConfigurationHolderConfiguratio
 	public VanillaClassicConfiguration(File dataFolder) {
 		super(new YamlConfiguration(new File(dataFolder, "config.yml")));
 	}
-	
+
 	@Override
 	public void load() {
 		try {
 			super.load();
 			super.save();
-		}
-		catch (ConfigurationException e) {
+		} catch (ConfigurationException e) {
 			VanillaClassicPlugin.getInstance().getLogger().log(Level.WARNING, "Error loading VanillaClassic configuration: ", e);
-			
+
 		}
 	}
-	
+
 	@Override
 	public void save() {
 		try {
