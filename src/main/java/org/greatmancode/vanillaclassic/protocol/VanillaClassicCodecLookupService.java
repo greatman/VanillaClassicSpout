@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -39,6 +39,7 @@ import org.greatmancode.vanillaclassic.protocol.codec.SetBlockClientCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.SetBlockServerCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.SpawnPlayerCodec;
 import org.greatmancode.vanillaclassic.protocol.codec.UpdateUserTypeCodec;
+
 import org.spout.api.protocol.CodecLookupService;
 
 public class VanillaClassicCodecLookupService extends CodecLookupService {

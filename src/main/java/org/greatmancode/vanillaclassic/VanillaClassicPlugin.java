@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -28,18 +28,17 @@ package org.greatmancode.vanillaclassic;
 
 import org.greatmancode.vanillaclassic.configuration.VanillaClassicConfiguration;
 import org.greatmancode.vanillaclassic.protocol.VanillaClassicProtocol;
+
 import org.spout.api.plugin.CommonPlugin;
 import org.spout.api.protocol.Protocol;
 
 public class VanillaClassicPlugin extends CommonPlugin {
-
 	private static VanillaClassicPlugin instance;
 	private VanillaClassicConfiguration config;
 
 	@Override
 	public void onEnable() {
 		config.load();
-
 	}
 
 	@Override
@@ -62,5 +61,4 @@ public class VanillaClassicPlugin extends CommonPlugin {
 	public VanillaClassicConfiguration getConfig() {
 		return config;
 	}
-
 }
