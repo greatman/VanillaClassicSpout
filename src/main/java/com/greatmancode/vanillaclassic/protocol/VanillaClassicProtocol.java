@@ -54,6 +54,7 @@ public class VanillaClassicProtocol extends Protocol {
 		if (codec == null) {
 			throw new UnknownPacketException(opcode);
 		}
+		System.out.println("CODEC: " + codec.getOpcode());
 		return codec;
 	}
 

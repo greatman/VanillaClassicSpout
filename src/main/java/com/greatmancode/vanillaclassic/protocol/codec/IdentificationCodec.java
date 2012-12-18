@@ -43,10 +43,15 @@ public final class IdentificationCodec extends MessageCodec<IdentificationMessag
 
 	@Override
 	public IdentificationMessage decode(ChannelBuffer buffer) throws IOException {
+		System.out.println("DECODING");
 		byte protocolVersion = buffer.readByte();
+		System.out.println("Hey");
 		String username = ChannelBufferUtils.readString(buffer);
+		System.out.println("Hey");
 		String verificationKey = ChannelBufferUtils.readString(buffer);
+		System.out.println("Hey");
 		buffer.readUnsignedByte();
+		System.out.println("DECODED");
 		return new IdentificationMessage(protocolVersion, username, verificationKey, (byte) 0);
 	}
 

@@ -26,28 +26,35 @@
  */
 package com.greatmancode.vanillaclassic.protocol;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 import org.jboss.netty.buffer.ChannelBuffer;
 
 public class ChannelBufferUtils {
 	public final static int STRING_LENGTH = 64;
 
 	public static String readString(ChannelBuffer buf) {
-
-		char[] characters = new char[STRING_LENGTH];
-		for (int i = 0; i < 64; i++) {
-			characters[i] = buf.readChar();
-		}
-
-		return new String(characters);
+		byte[] string = new byte[STRING_LENGTH];
+		buf.readBytes(string);
+		System.out.println(new String(string));
+		return new String(string);
 	}
 
 	public static void writeString(ChannelBuffer buf, String str) {
-		for (int i = 0; i < STRING_LENGTH; i++) {
-			if (str.length() < i) {
-				buf.writeChar(0x20);
-			} else {
-				buf.writeChar(str.charAt(i));
+		try {
+			byte[] string = Hex.decodeHex(str.toCharArray());
+			byte[] newString = new byte[STRING_LENGTH];
+			for (int i = 0; i < newString.length; i++) {
+				if (string.length < i) {
+					newString[i] = 0x20;
+				} else {
+					newString[i] = string[i];
+				}
 			}
+			buf.writeBytes(newString);
+		} catch (DecoderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
