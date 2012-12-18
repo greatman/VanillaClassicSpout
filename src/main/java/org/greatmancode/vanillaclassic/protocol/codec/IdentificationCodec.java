@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -32,6 +32,7 @@ import org.greatmancode.vanillaclassic.protocol.ChannelBufferUtils;
 import org.greatmancode.vanillaclassic.protocol.msg.IdentificationMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
+
 import org.spout.api.protocol.MessageCodec;
 
 public final class IdentificationCodec extends MessageCodec<IdentificationMessage> {

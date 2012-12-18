@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -26,22 +26,20 @@
  */
 package org.greatmancode.vanillaclassic.protocol.msg;
 
-public class PlayerMessageMessage extends VanillaClassicMessage {
-
-	private final short playerID;
+public class MessageMessage extends VanillaClassicMessage {
+	private final byte playerID;
 	private final String message;
 
-	public PlayerMessageMessage(short playerID, String message) {
+	public MessageMessage(byte playerID, String message) {
 		this.playerID = playerID;
 		this.message = message;
 	}
 
-	public short getPlayerID() {
+	public byte getPlayerID() {
 		return playerID;
 	}
 
 	public String getMessage() {
 		return message;
 	}
-
 }

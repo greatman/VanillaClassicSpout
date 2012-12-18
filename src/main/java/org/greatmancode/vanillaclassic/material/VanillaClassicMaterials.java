@@ -32,5 +32,5 @@ import org.greatmancode.vanillaclassic.material.basic.Air;
  * Holds all the materials found in the classic game.
  */
 public class VanillaClassicMaterials {
-	public static Air AIR = new Air();
+	public static final Air AIR = new Air();
 }

@@ -1,38 +1,51 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Project information -->
+	<name>VanillaClassic</name>
 	<groupId>com.greatmancode</groupId>
 	<artifactId>vanillaclassic</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<inceptionYear>2011</inceptionYear>
-	<name>VanillaClassic</name>
+	<version>0.30-SNAPSHOT</version>
 	<url>https://github.com/greatman/vanillaclassic</url>
-	<description>Spout platform implementation for Minecraft Classic.</description>
+	<description>VanillaClassic is a plugin for the Spout platform that provides vanilla Minecraft Classic functionality and gameplay.</description>
 
-	<!-- Source code -->
-	<scm>
-		<developerConnection>scm:git:git@github.com:greatman/vanillaclassic.git</developerConnection>
-		<connection>scm:git:git://github.com/greatman/vanillaclassic.git</connection>
-		<url>https://github.com/greatman/vanillaclassic</url>
-	</scm>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mainClass>com.greatmancode.vanillaclassic.VanillaClassicPlugin</mainClass>
+		<spoutVersion>dev-SNAPSHOT</spoutVersion>
+		<buildNumber>0</buildNumber>
+	</properties>
 
 	<!-- Organization -->
 	<organization>
 		<name>Greatman</name>
-		<url>http://github.com/greatman</url>
+		<url>http://www.github.com/greatman</url>
 	</organization>
+
+	<!-- License -->
+	<licenses>
+		<license>
+			<name>SpoutDev License Version 1</name>
+			<url>http://www.spout.org/SpoutDevLicenseV1.txt</url>
+			<distribution>repo</distribution>
+			<comments>GNU Lesser General Public License Version 3, but with a provision that files are released under the MIT license 180 days after they are published.</comments>
+		</license>
+	</licenses>
+
+	<!-- Source code -->
+	<scm>
+		<developerConnection>scm:git:git@github.com:greatman/VanillaClassic.git</developerConnection>
+		<connection>scm:git:git://github.com/greatman/VanillaClassic.git</connection>
+		<url>https://github.com/greatman/VanillaClassic</url>
+	</scm>
+
 	<!-- Continuous integration -->
 	<ciManagement>
 		<system>jenkins</system>
 		<url>http://jenkins.thebigdigmc.info/job/VanillaClassic</url>
 	</ciManagement>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spoutVersion>dev-SNAPSHOT</spoutVersion>
-	</properties>
-
+	<!-- Repository locations -->
 	<repositories>
 		<repository>
 			<id>spout-repo</id>
@@ -40,25 +53,36 @@
 		</repository>
 	</repositories>
 
+	<!-- Dependencies -->
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.spout</groupId>
 			<artifactId>spoutapi</artifactId>
 			<version>${spoutVersion}</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
+	<!-- Build settings -->
 	<build>
 		<defaultGoal>clean install</defaultGoal>
+
+		<!-- Resources -->
 		<resources>
+			<resource>
+				<targetPath>.</targetPath>
+				<filtering>false</filtering>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>LICENSE.txt</include>
+				</includes>
+			</resource>
 			<resource>
 				<targetPath>.</targetPath>
 				<filtering>true</filtering>
@@ -67,40 +91,18 @@
 					<include>*.yml</include>
 				</includes>
 			</resource>
+			<resource>
+				<targetPath>.</targetPath>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
 		</resources>
+
+		<!-- Plugins -->
 		<plugins>
-			<!-- Compiler plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<compilerArguments>
-						<O>-Xlint:all</O>
-						<O>-Xlint:-path</O>
-					</compilerArguments>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>javadoc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludePackageNames>com.greatmancode.craftconomy3.commands:com.greatmancode.craftconomy3.spout</excludePackageNames>
-				</configuration>
-			</plugin>
 			<!-- License header formatting plugin -->
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
@@ -131,12 +133,37 @@
 						<url>${project.organization.url}</url>
 						<license>SpoutDev License Version 1</license>
 						<licenseUrl>http://www.spout.org/SpoutDevLicenseV1.txt</licenseUrl>
-						<copyright>Copyright (c) ${project.inceptionYear}-2012, ${project.organization.name}</copyright>
+						<copyright>Copyright (c) 2012, ${project.organization.name}</copyright>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>
 						<include>src/test/java/**</include>
 					</includes>
+				</configuration>
+			</plugin>
+			<!-- Compiler plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerArguments>
+						<O>-Xlint:all</O>
+						<O>-Xlint:-path</O>
+					</compilerArguments>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<!-- Testing plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
 				</configuration>
 			</plugin>
 		</plugins>

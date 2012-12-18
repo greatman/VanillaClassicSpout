@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2011-2012, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -26,12 +26,11 @@
  */
 package org.greatmancode.vanillaclassic.protocol.msg;
 
-public class PlayerPositionMessage extends VanillaClassicMessage {
+public class PositionMessage extends VanillaClassicMessage {
+	private final byte playerID, yaw, pitch;
+	private final short x, y, z;
 
-	private final byte yaw, pitch;
-	private final short x, y, z, playerID;
-	
-	public PlayerPositionMessage(short playerID, short x, short y, short z, byte yaw, byte pitch) {
+	public PositionMessage(byte playerID, short x, short y, short z, byte yaw, byte pitch) {
 		this.playerID = playerID;
 		this.x = x;
 		this.y = y;
