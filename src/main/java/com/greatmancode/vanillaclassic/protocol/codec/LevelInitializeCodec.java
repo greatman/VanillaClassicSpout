@@ -27,6 +27,10 @@
 package com.greatmancode.vanillaclassic.protocol.codec;
 
 
+import java.io.IOException;
+
+import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 
 import com.greatmancode.vanillaclassic.protocol.msg.LevelInitializeMessage;
@@ -34,5 +38,10 @@ import com.greatmancode.vanillaclassic.protocol.msg.LevelInitializeMessage;
 public final class LevelInitializeCodec extends MessageCodec<LevelInitializeMessage> {
 	public LevelInitializeCodec() {
 		super(LevelInitializeMessage.class, 0x02);
+	}
+	
+	@Override
+	public ChannelBuffer encode(LevelInitializeMessage message) throws IOException {
+		return ChannelBuffers.EMPTY_BUFFER;
 	}
 }

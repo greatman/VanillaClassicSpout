@@ -44,5 +44,6 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 	protected void worldChanged(World world) {
 		System.out.println("CHANGING WORLD");
 		session.send(false, new LevelInitializeMessage());
+		System.out.println("worldChanged done");
 	}
 }
