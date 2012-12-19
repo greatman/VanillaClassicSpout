@@ -27,13 +27,18 @@
 package com.greatmancode.vanillaclassic.protocol;
 
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
 import org.jboss.netty.buffer.ChannelBuffer;
+
+import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 
 public class ChannelBufferUtils {
 	public static final int STRING_LENGTH = 64;
+
+	private ChannelBufferUtils() {
+
+	}
 
 	public static String readString(ChannelBuffer buf) {
 		byte[] string = new byte[STRING_LENGTH];
@@ -55,8 +60,7 @@ public class ChannelBufferUtils {
 			}
 			buf.writeBytes(newString);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			VanillaClassicPlugin.getInstance().getLogger().log(Level.SEVERE, "The US-ASCII encoding was not found on this system!", e);
 		}
 	}
 }

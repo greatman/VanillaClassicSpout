@@ -41,7 +41,7 @@ import com.greatmancode.vanillaclassic.protocol.msg.DisconnectPlayerMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.MessageMessage;
 
 public class VanillaClassicProtocol extends Protocol {
-	public final static int DEFAULT_PORT = 25565;
+	public static final int DEFAULT_PORT = 25565;
 
 	public VanillaClassicProtocol() {
 		super("VanillaClassic", 25565, new VanillaClassicCodecLookupService(), new VanillaClassicHandlerLookupService());

@@ -27,10 +27,12 @@
 package com.greatmancode.vanillaclassic.material;
 
 import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 import org.spout.api.material.BlockMaterial;
 import org.spout.api.material.Material;
 
+import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 import com.greatmancode.vanillaclassic.material.basic.Bedrock;
 import com.greatmancode.vanillaclassic.material.basic.Bookshelf;
 import com.greatmancode.vanillaclassic.material.basic.BrickBlock;
@@ -77,7 +79,7 @@ public class VanillaClassicMaterials {
 	public static final Sapling SAPLING = new Sapling();
 	public static final Bedrock BEDROCK = new Bedrock();
 	public static final Water WATER = new Water();
-	public static final StationaryWater StationaryWater = new StationaryWater();
+	public static final StationaryWater STATIONARY_WATER = new StationaryWater();
 	public static final Lava LAVA = new Lava();
 	public static final StationaryLava STATIONARY_LAVA = new StationaryLava();
 	public static final Sand SAND = new Sand();
@@ -119,6 +121,10 @@ public class VanillaClassicMaterials {
 	public static final MossStone MOSS_STONE = new MossStone();
 	public static final Obsidian OBSIDIAN = new Obsidian();
 
+	private VanillaClassicMaterials() {
+
+	}
+
 	public static Material getMaterialFromID(byte id) {
 		Field[] fields = VanillaClassicMaterials.class.getDeclaredFields();
 		for (int i = 0; i <= fields.length; i++) {
@@ -128,11 +134,9 @@ public class VanillaClassicMaterials {
 					return (Material) obj;
 				}
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				VanillaClassicPlugin.getInstance().getLogger().log(Level.SEVERE, "Error while retrieving a material from a ID!", e);
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				VanillaClassicPlugin.getInstance().getLogger().log(Level.SEVERE, "Error while retrieving a material from a ID!", e);
 			}
 		}
 		return null;

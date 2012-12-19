@@ -29,6 +29,7 @@ package com.greatmancode.vanillaclassic.protocol.handler;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
 
 import org.spout.api.Spout;
 import org.spout.api.event.player.PlayerConnectEvent;
@@ -68,14 +69,9 @@ public final class IdentificationHandler extends MessageHandler<IdentificationMe
 			byte[] digest = m.digest();
 			BigInteger bigInt = new BigInteger(1, digest);
 			String hashtext = bigInt.toString(16);
-			// Now we need to zero pad it if you actually want the full 32 chars.
-			while (hashtext.length() < 32) {
-				hashtext = "0" + hashtext;
-			}
 			return hashtext;
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			VanillaClassicPlugin.getInstance().getLogger().log(Level.SEVERE, "Unable to find the MD5 algorithm!", e);
 		}
 		return null;
 	}

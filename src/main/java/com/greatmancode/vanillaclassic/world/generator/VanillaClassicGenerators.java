@@ -30,12 +30,18 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
+import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 import com.greatmancode.vanillaclassic.world.generator.flat.FlatGenerator;
 
 public class VanillaClassicGenerators {
 	public static final FlatGenerator FLAT = new FlatGenerator(5);
 	private static final Map<String, VanillaClassicGenerator> BY_NAME = new HashMap<String, VanillaClassicGenerator>();
+
+	private VanillaClassicGenerators() {
+
+	}
 
 	static {
 		for (Field objectField : VanillaClassicGenerators.class.getDeclaredFields()) {
@@ -46,8 +52,7 @@ public class VanillaClassicGenerators {
 					BY_NAME.put(objectField.getName().toLowerCase(), (VanillaClassicGenerator) object);
 				}
 			} catch (Exception ex) {
-				System.out.println("Could not properly reflect VanillaGenerators! Unexpected behaviour may occur, please report to http://issues.spout.org!");
-				ex.printStackTrace();
+				VanillaClassicPlugin.getInstance().getLogger().log(Level.SEVERE, "Could not properly reflect VanillaClassicGenerators! Unexpected behaviour may occur, please report to greatman!", ex);
 			}
 		}
 	}

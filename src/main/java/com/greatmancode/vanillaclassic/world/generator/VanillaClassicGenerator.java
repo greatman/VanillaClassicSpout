@@ -31,5 +31,5 @@ import org.spout.api.geo.World;
 import org.spout.api.geo.discrete.Point;
 
 public interface VanillaClassicGenerator extends WorldGenerator {
-	abstract Point getSafeSpawn(World world);
+	Point getSafeSpawn(World world);
 }
