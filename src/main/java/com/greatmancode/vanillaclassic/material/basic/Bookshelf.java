@@ -24,12 +24,13 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package com.greatmancode.vanillaclassic.material;
+package com.greatmancode.vanillaclassic.material.basic;
 
-public abstract class Ore extends ClassicBlockMaterial {
+import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 
-	public Ore(String name, int id) {
-		super(name, id);
+public class Bookshelf extends ClassicBlockMaterial {
+
+	public Bookshelf() {
+		super("Bookshelf", 47);
 	}
-
 }

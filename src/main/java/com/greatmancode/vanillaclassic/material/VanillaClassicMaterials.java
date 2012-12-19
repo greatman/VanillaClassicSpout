@@ -29,26 +29,37 @@ package com.greatmancode.vanillaclassic.material;
 import org.spout.api.material.BlockMaterial;
 
 import com.greatmancode.vanillaclassic.material.basic.Bedrock;
+import com.greatmancode.vanillaclassic.material.basic.Bookshelf;
+import com.greatmancode.vanillaclassic.material.basic.BrickBlock;
 import com.greatmancode.vanillaclassic.material.basic.Cloth;
-import com.greatmancode.vanillaclassic.material.basic.CoalOre;
 import com.greatmancode.vanillaclassic.material.basic.CobbleStone;
 import com.greatmancode.vanillaclassic.material.basic.Dirt;
+import com.greatmancode.vanillaclassic.material.basic.DoubleSlab;
+import com.greatmancode.vanillaclassic.material.basic.Flower;
 import com.greatmancode.vanillaclassic.material.basic.Glass;
-import com.greatmancode.vanillaclassic.material.basic.GoldOre;
 import com.greatmancode.vanillaclassic.material.basic.Grass;
 import com.greatmancode.vanillaclassic.material.basic.Gravel;
-import com.greatmancode.vanillaclassic.material.basic.IronOre;
 import com.greatmancode.vanillaclassic.material.basic.Leaves;
+import com.greatmancode.vanillaclassic.material.basic.MossStone;
+import com.greatmancode.vanillaclassic.material.basic.Mushroom;
+import com.greatmancode.vanillaclassic.material.basic.Obsidian;
 import com.greatmancode.vanillaclassic.material.basic.Sand;
 import com.greatmancode.vanillaclassic.material.basic.Sapling;
+import com.greatmancode.vanillaclassic.material.basic.Slab;
 import com.greatmancode.vanillaclassic.material.basic.Sponge;
 import com.greatmancode.vanillaclassic.material.basic.Stone;
+import com.greatmancode.vanillaclassic.material.basic.TNT;
 import com.greatmancode.vanillaclassic.material.basic.Wood;
 import com.greatmancode.vanillaclassic.material.basic.WoodenPlank;
 import com.greatmancode.vanillaclassic.material.liquid.Lava;
 import com.greatmancode.vanillaclassic.material.liquid.StationaryLava;
 import com.greatmancode.vanillaclassic.material.liquid.StationaryWater;
 import com.greatmancode.vanillaclassic.material.liquid.Water;
+import com.greatmancode.vanillaclassic.material.ore.CoalOre;
+import com.greatmancode.vanillaclassic.material.ore.GoldOre;
+import com.greatmancode.vanillaclassic.material.ore.IronOre;
+import com.greatmancode.vanillaclassic.material.ore.block.GoldBlock;
+import com.greatmancode.vanillaclassic.material.ore.block.IronBlock;
 
 /**
  * Holds all the materials found in the classic game.
@@ -84,4 +95,24 @@ public class VanillaClassicMaterials {
 	public static final Cloth CYAN_CLOTH = new Cloth("Cyan Cloth", 27);
 	public static final Cloth BLUE_CLOTH = new Cloth("Blue Cloth", 28);
 	public static final Cloth PURPLE_CLOTH = new Cloth("Purple Cloth", 29);
+	public static final Cloth INDIGO_CLOTH = new Cloth("Indigo Cloth", 30);
+	public static final Cloth VIOLET_CLOTH = new Cloth("Violet Cloth", 31);
+	public static final Cloth MAGENTA_CLOTH = new Cloth("Magenta Cloth", 32);
+	public static final Cloth PINK_CLOTH = new Cloth("Pink Cloth", 33);
+	public static final Cloth BLACK_CLOTH = new Cloth("Black Cloth", 34);
+	public static final Cloth GRAY_CLOTH = new Cloth("Gray Cloth", 35);
+	public static final Cloth WHITE_CLOTH = new Cloth("White Cloth", 36);
+	public static final Flower DANDELION = new Flower("Dandelion", 37);
+	public static final Flower ROSE = new Flower("Rose", 38);
+	public static final Mushroom BROWN_MUSHROOM = new Mushroom("Brown Mushroom", 39);
+	public static final Mushroom RED_MUSHROOM = new Mushroom("Red Mushroom", 40);
+	public static final GoldBlock GOLD_BLOCK = new GoldBlock();
+	public static final IronBlock IRON_BLOCK = new IronBlock();
+	public static final DoubleSlab DOUBLE_SLAB = new DoubleSlab();
+	public static final Slab SLAB = new Slab();
+	public static final BrickBlock BRICK_BLOCK = new BrickBlock();
+	public static final TNT TNT = new TNT();
+	public static final Bookshelf BOOKSHELF = new Bookshelf();
+	public static final MossStone MOSS_STONE = new MossStone();
+	public static final Obsidian OBSIDIAN = new Obsidian();
 }

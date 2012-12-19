@@ -26,11 +26,12 @@
  */
 package com.greatmancode.vanillaclassic.material.basic;
 
-import com.greatmancode.vanillaclassic.material.Ore;
+import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 
-public class CoalOre extends Ore {
+public class DoubleSlab extends ClassicBlockMaterial {
 
-	public CoalOre() {
-		super("Coal Ore", 16);
+	public DoubleSlab() {
+		super("Double Slab", 43);
 	}
+
 }

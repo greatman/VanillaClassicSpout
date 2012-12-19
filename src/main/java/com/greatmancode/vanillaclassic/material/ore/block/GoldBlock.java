@@ -24,13 +24,12 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package com.greatmancode.vanillaclassic.material.basic;
+package com.greatmancode.vanillaclassic.material.ore.block;
 
-import com.greatmancode.vanillaclassic.material.Ore;
 
-public class IronOre extends Ore {
+public class GoldBlock extends OreBlock {
 
-	public IronOre() {
-		super("Iron Ore", 15);
+	public GoldBlock() {
+		super("Gold Block", 41);
 	}
 }

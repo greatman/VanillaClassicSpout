@@ -26,11 +26,13 @@
  */
 package com.greatmancode.vanillaclassic.material.basic;
 
-import com.greatmancode.vanillaclassic.material.Ore;
+import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 
-public class GoldOre extends Ore {
+public class Flower extends ClassicBlockMaterial {
 
-	public GoldOre() {
-		super("Gold Ore", 14);
+	//TODO: Something to what what flower it is.
+	public Flower(String name, int id) {
+		super(name, id);
 	}
+
 }
