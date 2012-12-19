@@ -102,15 +102,12 @@ public class VanillaClassicPlugin extends CommonPlugin {
 					HttpGet get;
 					try {
 						get = new HttpGet(builder.build());
-						System.out.println(get.toString());
 						String reply = new BufferedReader(new InputStreamReader(new DefaultHttpClient().execute(get).getEntity().getContent())).readLine();
 						getLogger().info("Connect to the server using this URL: " + reply);
 					} catch (Exception e) {
 						getLogger().log(Level.WARNING, "Error while sending a heartbeat to minecraft.net!", e);
 					}
-					
 				}
-
 			}, 0, 45, TimeUnit.SECONDS);
 		}
 		

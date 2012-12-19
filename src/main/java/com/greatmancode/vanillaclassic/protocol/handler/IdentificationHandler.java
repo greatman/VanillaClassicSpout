@@ -44,6 +44,11 @@ public final class IdentificationHandler extends MessageHandler<IdentificationMe
 	public void handleServer(Session session, IdentificationMessage message) {
 		System.out.println("We received a player!");
 		System.out.println(md5(VanillaClassicPlugin.SALT + message.getUsernameOrServerName()));
+		
+		if (message.getProtocolVersion() != VanillaClassicPlugin.PROTOCOL_VERSION) {
+			session.disconnect("Invalid protocol ID! Are you updated?");
+			return;
+		}
 		if (message.getVerificationKeyOrServerMOTD().equals(md5(VanillaClassicPlugin.SALT + message.getUsernameOrServerName()))) {
 			// User is valid. Let's send our response
 			System.out.println("User is valid. Let's roll!");

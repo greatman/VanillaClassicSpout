@@ -26,6 +26,8 @@
  */
 package com.greatmancode.vanillaclassic.protocol;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.jboss.netty.buffer.ChannelBuffer;
@@ -42,7 +44,7 @@ public class ChannelBufferUtils {
 
 	public static void writeString(ChannelBuffer buf, String str) {
 		try {
-			byte[] string = Hex.decodeHex(str.toCharArray());
+			byte[] string = str.getBytes("US-ASCII");
 			byte[] newString = new byte[STRING_LENGTH];
 			for (int i = 0; i < newString.length; i++) {
 				if (string.length < i) {
@@ -52,7 +54,7 @@ public class ChannelBufferUtils {
 				}
 			}
 			buf.writeBytes(newString);
-		} catch (DecoderException e) {
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
