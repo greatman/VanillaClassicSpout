@@ -29,12 +29,15 @@ package com.greatmancode.vanillaclassic.protocol;
 import org.spout.api.protocol.HandlerLookupService;
 
 import com.greatmancode.vanillaclassic.protocol.handler.IdentificationHandler;
+import com.greatmancode.vanillaclassic.protocol.handler.SetBlockHandler;
 import com.greatmancode.vanillaclassic.protocol.msg.IdentificationMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.SetBlockClientMessage;
 
 public class VanillaClassicHandlerLookupService extends HandlerLookupService {
 	public VanillaClassicHandlerLookupService() {
 		try {
 			bind(IdentificationMessage.class, IdentificationHandler.class);
+			bind(SetBlockClientMessage.class, SetBlockHandler.class);
 		} catch (Exception ex) {
 			throw new ExceptionInInitializerError(ex);
 		}

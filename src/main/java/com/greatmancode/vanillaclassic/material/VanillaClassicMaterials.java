@@ -26,7 +26,10 @@
  */
 package com.greatmancode.vanillaclassic.material;
 
+import java.lang.reflect.Field;
+
 import org.spout.api.material.BlockMaterial;
+import org.spout.api.material.Material;
 
 import com.greatmancode.vanillaclassic.material.basic.Bedrock;
 import com.greatmancode.vanillaclassic.material.basic.Bookshelf;
@@ -115,4 +118,23 @@ public class VanillaClassicMaterials {
 	public static final Bookshelf BOOKSHELF = new Bookshelf();
 	public static final MossStone MOSS_STONE = new MossStone();
 	public static final Obsidian OBSIDIAN = new Obsidian();
+
+	public static Material getMaterialFromID(byte id) {
+		Field[] fields = VanillaClassicMaterials.class.getDeclaredFields();
+		for (int i = 0; i <= fields.length; i++) {
+			try {
+				Object obj = fields[i].get(null);
+				if (obj instanceof ClassicBlockMaterial && ((ClassicBlockMaterial) obj).getClassicId() == id) {
+					return (Material) obj;
+				}
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 }
