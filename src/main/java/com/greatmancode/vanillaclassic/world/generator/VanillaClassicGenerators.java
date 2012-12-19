@@ -35,7 +35,7 @@ import java.util.logging.Level;
 import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 import com.greatmancode.vanillaclassic.world.generator.flat.FlatGenerator;
 
-public class VanillaClassicGenerators {
+public final class VanillaClassicGenerators {
 	public static final FlatGenerator FLAT = new FlatGenerator(5);
 	private static final Map<String, VanillaClassicGenerator> BY_NAME = new HashMap<String, VanillaClassicGenerator>();
 

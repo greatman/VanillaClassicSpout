@@ -69,7 +69,7 @@ import com.greatmancode.vanillaclassic.material.ore.block.IronBlock;
 /**
  * Holds all the materials found in the classic game.
  */
-public class VanillaClassicMaterials {
+public final class VanillaClassicMaterials {
 	public static final BlockMaterial AIR = BlockMaterial.AIR;
 	public static final Stone STONE = new Stone();
 	public static final Grass GRASS = new Grass();

@@ -33,7 +33,7 @@ import org.jboss.netty.buffer.ChannelBuffer;
 
 import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 
-public class ChannelBufferUtils {
+public final class ChannelBufferUtils {
 	public static final int STRING_LENGTH = 64;
 
 	private ChannelBufferUtils() {
@@ -43,7 +43,6 @@ public class ChannelBufferUtils {
 	public static String readString(ChannelBuffer buf) {
 		byte[] string = new byte[STRING_LENGTH];
 		buf.readBytes(string);
-		System.out.println(new String(string));
 		return new String(string);
 	}
 

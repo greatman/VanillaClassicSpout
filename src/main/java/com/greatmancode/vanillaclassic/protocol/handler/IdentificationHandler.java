@@ -68,8 +68,7 @@ public final class IdentificationHandler extends MessageHandler<IdentificationMe
 			m.update(text.getBytes());
 			byte[] digest = m.digest();
 			BigInteger bigInt = new BigInteger(1, digest);
-			String hashtext = bigInt.toString(16);
-			return hashtext;
+			return bigInt.toString(16);
 		} catch (NoSuchAlgorithmException e) {
 			VanillaClassicPlugin.getInstance().getLogger().log(Level.SEVERE, "Unable to find the MD5 algorithm!", e);
 		}
