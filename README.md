@@ -42,7 +42,7 @@ If you do not already have repo.spout.org in your repository list, you will need
 
     <repository>
         <id>greatman-repo</id>
-        <url>https://repo.greatmancode.com</url>
+        <url>http://repo.greatmancode.com/content/groups/public/</url>
     </repository>
 
 Coding and Pull Request Formatting
