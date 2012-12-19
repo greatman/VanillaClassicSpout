@@ -24,12 +24,13 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package com.greatmancode.vanillaclassic.world.generator;
+package com.greatmancode.vanillaclassic.material.basic;
 
-import org.spout.api.generator.WorldGenerator;
-import org.spout.api.geo.World;
-import org.spout.api.geo.discrete.Point;
+import com.greatmancode.vanillaclassic.material.Ore;
 
-public interface VanillaClassicGenerator extends WorldGenerator {
-	abstract Point getSafeSpawn(World world);
+public class GoldOre extends Ore {
+
+	public GoldOre() {
+		super("Gold Ore", 14);
+	}
 }

@@ -24,12 +24,15 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package com.greatmancode.vanillaclassic.world.generator;
+package com.greatmancode.vanillaclassic.material.liquid;
 
-import org.spout.api.generator.WorldGenerator;
-import org.spout.api.geo.World;
-import org.spout.api.geo.discrete.Point;
+import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 
-public interface VanillaClassicGenerator extends WorldGenerator {
-	abstract Point getSafeSpawn(World world);
+public class Water extends ClassicBlockMaterial {
+
+	public Water() {
+		super("Water", 8);
+	}
+	
+	//TODO: Make water move if possible?
 }

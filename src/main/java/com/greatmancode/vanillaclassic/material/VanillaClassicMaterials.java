@@ -29,12 +29,26 @@ package com.greatmancode.vanillaclassic.material;
 import org.spout.api.material.BlockMaterial;
 
 import com.greatmancode.vanillaclassic.material.basic.Bedrock;
+import com.greatmancode.vanillaclassic.material.basic.Cloth;
+import com.greatmancode.vanillaclassic.material.basic.CoalOre;
 import com.greatmancode.vanillaclassic.material.basic.CobbleStone;
 import com.greatmancode.vanillaclassic.material.basic.Dirt;
+import com.greatmancode.vanillaclassic.material.basic.Glass;
+import com.greatmancode.vanillaclassic.material.basic.GoldOre;
 import com.greatmancode.vanillaclassic.material.basic.Grass;
+import com.greatmancode.vanillaclassic.material.basic.Gravel;
+import com.greatmancode.vanillaclassic.material.basic.IronOre;
+import com.greatmancode.vanillaclassic.material.basic.Leaves;
+import com.greatmancode.vanillaclassic.material.basic.Sand;
 import com.greatmancode.vanillaclassic.material.basic.Sapling;
+import com.greatmancode.vanillaclassic.material.basic.Sponge;
 import com.greatmancode.vanillaclassic.material.basic.Stone;
+import com.greatmancode.vanillaclassic.material.basic.Wood;
 import com.greatmancode.vanillaclassic.material.basic.WoodenPlank;
+import com.greatmancode.vanillaclassic.material.liquid.Lava;
+import com.greatmancode.vanillaclassic.material.liquid.StationaryLava;
+import com.greatmancode.vanillaclassic.material.liquid.StationaryWater;
+import com.greatmancode.vanillaclassic.material.liquid.Water;
 
 /**
  * Holds all the materials found in the classic game.
@@ -48,4 +62,26 @@ public class VanillaClassicMaterials {
 	public static final WoodenPlank WOODEN_PLANK = new WoodenPlank();
 	public static final Sapling SAPLING = new Sapling();
 	public static final Bedrock BEDROCK = new Bedrock();
+	public static final Water WATER = new Water();
+	public static final StationaryWater StationaryWater = new StationaryWater();
+	public static final Lava LAVA = new Lava();
+	public static final StationaryLava STATIONARY_LAVA = new StationaryLava();
+	public static final Sand SAND = new Sand();
+	public static final Gravel GRAVEL = new Gravel();
+	public static final GoldOre GOLD_ORE = new GoldOre();
+	public static final IronOre IRON_ORE = new IronOre();
+	public static final CoalOre COAL_ORE = new CoalOre();
+	public static final Wood WOOD = new Wood();
+	public static final Leaves LEAVES = new Leaves();
+	public static final Sponge SPONGE = new Sponge();
+	public static final Glass GLASS = new Glass();
+	public static final Cloth RED_CLOTH = new Cloth("Red Cloth", 21);
+	public static final Cloth ORANGE_CLOTH = new Cloth("Orange Cloth", 22);
+	public static final Cloth YELLOW_CLOTH = new Cloth("Yellow Cloth", 23);
+	public static final Cloth LIME_CLOTH = new Cloth("Lime Cloth", 24);
+	public static final Cloth GREEN_CLOTH = new Cloth("Green Cloth", 25);
+	public static final Cloth AQUA_GREEN_CLOTH = new Cloth("Aqua Green Cloth", 26);
+	public static final Cloth CYAN_CLOTH = new Cloth("Cyan Cloth", 27);
+	public static final Cloth BLUE_CLOTH = new Cloth("Blue Cloth", 28);
+	public static final Cloth PURPLE_CLOTH = new Cloth("Purple Cloth", 29);
 }
