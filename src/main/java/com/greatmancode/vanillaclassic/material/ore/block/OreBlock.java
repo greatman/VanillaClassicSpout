@@ -28,7 +28,7 @@ package com.greatmancode.vanillaclassic.material.ore.block;
 
 import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 
-public class OreBlock extends ClassicBlockMaterial {
+public abstract class OreBlock extends ClassicBlockMaterial {
 
 	public OreBlock(String name, int id) {
 		super(name, id);
