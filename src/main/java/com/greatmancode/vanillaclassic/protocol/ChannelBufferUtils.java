@@ -31,7 +31,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.jboss.netty.buffer.ChannelBuffer;
 
 public class ChannelBufferUtils {
-	public final static int STRING_LENGTH = 64;
+	public static final int STRING_LENGTH = 64;
 
 	public static String readString(ChannelBuffer buf) {
 		byte[] string = new byte[STRING_LENGTH];

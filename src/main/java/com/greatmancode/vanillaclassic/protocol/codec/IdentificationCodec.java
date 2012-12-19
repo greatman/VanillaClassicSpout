@@ -57,11 +57,13 @@ public final class IdentificationCodec extends MessageCodec<IdentificationMessag
 
 	@Override
 	public ChannelBuffer encode(IdentificationMessage message) throws IOException {
+		System.out.println("ENCODING");
 		ChannelBuffer buffer = ChannelBuffers.buffer(130);
 		buffer.writeByte(message.getProtocolVersion());
 		ChannelBufferUtils.writeString(buffer, message.getUsernameOrServerName());
 		ChannelBufferUtils.writeString(buffer, message.getVerificationKeyOrServerMOTD());
 		buffer.writeByte(message.getUserType());
+		System.out.println("ENCODED");
 		return buffer;
 	}
 }

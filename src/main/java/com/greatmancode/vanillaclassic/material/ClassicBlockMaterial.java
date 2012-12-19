@@ -33,11 +33,13 @@ import org.spout.api.material.BlockMaterial;
  */
 public abstract class ClassicBlockMaterial extends BlockMaterial {
 	
+	private short mcID;
 	public ClassicBlockMaterial(String name, short id) {
-		super(name, id);
+		super(name);
+		this.mcID = id;
 	}
 
 	public byte getClassicId() {
-		return (byte) this.getId();
+		return (byte) this.mcID;
 	}
 }

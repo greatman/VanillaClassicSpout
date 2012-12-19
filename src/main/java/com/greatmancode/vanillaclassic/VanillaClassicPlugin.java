@@ -27,21 +27,15 @@
 package com.greatmancode.vanillaclassic;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.http.client.methods.HttpGet;
@@ -71,7 +65,7 @@ public class VanillaClassicPlugin extends CommonPlugin {
 	private InetSocketAddress address;
 	private ScheduledFuture<?> heartbeat;
 	public static final byte PROTOCOL_VERSION = 0x07;
-	public static final String salt = UUID.randomUUID().toString().replace("-", "").substring(0, 15); // TODO: Need to random that
+	public static final String SALT = UUID.randomUUID().toString().replace("-", "").substring(0, 15); // TODO: Need to random that
 
 	@Override
 	public void onEnable() {
@@ -100,26 +94,19 @@ public class VanillaClassicPlugin extends CommonPlugin {
 				public void run() {
 					URIBuilder builder = new URIBuilder();
 					builder.setScheme("http").setHost("www.minecraft.net").setPath("/heartbeat.jsp");
-					builder.setParameter("port", String.valueOf(address.getPort()));
-					builder.setParameter("max", String.valueOf(((Server)getEngine()).getMaxPlayers()));
-					builder.setParameter("name", VanillaClassicConfiguration.SERVER_NAME.getString());
+					builder.setParameter("port", String.valueOf(address.getPort())).setParameter("max", String.valueOf(((Server)getEngine()).getMaxPlayers())).setParameter("name", VanillaClassicConfiguration.SERVER_NAME.getString());
 					builder.setParameter("public", WordUtils.capitalize(Boolean.toString(VanillaClassicConfiguration.PUBLIC.getBoolean())));
 					builder.setParameter("version", Integer.toString(PROTOCOL_VERSION));
-					builder.setParameter("salt", salt);
+					builder.setParameter("salt", SALT);
 					builder.setParameter("users", String.valueOf(((Server)getEngine()).getOnlinePlayers().length));
 					HttpGet get;
 					try {
 						get = new HttpGet(builder.build());
 						System.out.println(get.toString());
-						BufferedReader reply = new BufferedReader(new InputStreamReader(new DefaultHttpClient().execute(get).getEntity().getContent()));
-						String value = null;
-						while ((value = reply.readLine()) != null) { // while loop begins here
-							getLogger().info("Connect to the server using this URL: " + value);
-						}
-						
+						String reply = new BufferedReader(new InputStreamReader(new DefaultHttpClient().execute(get).getEntity().getContent())).readLine();
+						getLogger().info("Connect to the server using this URL: " + reply);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						getLogger().log(Level.WARNING, "Error while sending a heartbeat to minecraft.net!", e);
 					}
 					
 				}

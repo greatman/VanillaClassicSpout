@@ -26,7 +26,6 @@
  */
 package com.greatmancode.vanillaclassic.protocol.handler;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,17 +43,20 @@ public final class IdentificationHandler extends MessageHandler<IdentificationMe
 	@Override
 	public void handleServer(Session session, IdentificationMessage message) {
 		System.out.println("We received a player!");
-		if (message.getVerificationKeyOrServerMOTD().equals(MD5(VanillaClassicPlugin.salt + message.getUsernameOrServerName()))) {
+		System.out.println(md5(VanillaClassicPlugin.SALT + message.getUsernameOrServerName()));
+		if (message.getVerificationKeyOrServerMOTD().equals(md5(VanillaClassicPlugin.SALT + message.getUsernameOrServerName()))) {
 			// User is valid. Let's send our response
 			System.out.println("User is valid. Let's roll!");
 			if (PlayerConnectEvent.getHandlerList().getRegisteredListeners().length > 0) {
-				Spout.getEventManager().callEvent(new PlayerConnectEvent(session, (String) session.getDataMap().get("username")));
+				Spout.getEventManager().callEvent(new PlayerConnectEvent(session, message.getUsernameOrServerName()));
+				System.out.println("Sending auth notice.");
 				session.send(false, new IdentificationMessage((byte) 0x07, VanillaClassicConfiguration.SERVER_NAME.getString(), VanillaClassicConfiguration.SERVER_NAME.getString(), (byte) 0x00)); // TODO: Get the real OP status
+				System.out.println("Sent!");
 			}
 		}
 	}
 
-	public static String MD5(String text) {
+	public static String md5(String text) {
 		try {
 			MessageDigest m = MessageDigest.getInstance("MD5");
 			m.update(text.getBytes());

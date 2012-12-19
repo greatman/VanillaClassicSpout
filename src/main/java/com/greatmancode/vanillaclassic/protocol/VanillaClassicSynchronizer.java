@@ -26,9 +26,12 @@
  */
 package com.greatmancode.vanillaclassic.protocol;
 
+import org.spout.api.geo.World;
 import org.spout.api.protocol.NetworkSynchronizer;
 import org.spout.api.protocol.Session;
 import org.spout.api.protocol.event.ProtocolEventListener;
+
+import com.greatmancode.vanillaclassic.protocol.msg.LevelInitializeMessage;
 
 /**
  * Synchronizes the game between multiple classic clients
@@ -36,5 +39,10 @@ import org.spout.api.protocol.event.ProtocolEventListener;
 public class VanillaClassicSynchronizer extends NetworkSynchronizer implements ProtocolEventListener {
 	public VanillaClassicSynchronizer(Session session) {
 		super(session, 2);
+	}
+	
+	protected void worldChanged(World world) {
+		System.out.println("CHANGING WORLD");
+		session.send(false, new LevelInitializeMessage());
 	}
 }

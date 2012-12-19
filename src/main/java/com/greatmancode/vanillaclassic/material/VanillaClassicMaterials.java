@@ -26,7 +26,8 @@
  */
 package com.greatmancode.vanillaclassic.material;
 
-import com.greatmancode.vanillaclassic.material.basic.Air;
+import org.spout.api.material.BlockMaterial;
+
 import com.greatmancode.vanillaclassic.material.basic.Bedrock;
 import com.greatmancode.vanillaclassic.material.basic.CobbleStone;
 import com.greatmancode.vanillaclassic.material.basic.Dirt;
@@ -39,7 +40,7 @@ import com.greatmancode.vanillaclassic.material.basic.WoodenPlank;
  * Holds all the materials found in the classic game.
  */
 public class VanillaClassicMaterials {
-	public static final Air AIR = new Air();
+	public static final BlockMaterial AIR = BlockMaterial.AIR;
 	public static final Stone STONE = new Stone();
 	public static final Grass GRASS = new Grass();
 	public static final Dirt DIRT = new Dirt();
