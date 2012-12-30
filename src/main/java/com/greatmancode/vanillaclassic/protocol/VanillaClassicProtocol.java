@@ -26,6 +26,8 @@
  */
 package com.greatmancode.vanillaclassic.protocol;
 
+import java.net.InetSocketAddress;
+
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 
@@ -37,7 +39,9 @@ import org.spout.api.protocol.MessageCodec;
 import org.spout.api.protocol.Protocol;
 import org.spout.api.protocol.Session;
 
+import com.greatmancode.vanillaclassic.configuration.VanillaClassicConfiguration;
 import com.greatmancode.vanillaclassic.protocol.msg.DisconnectPlayerMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.IdentificationMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.MessageMessage;
 
 public class VanillaClassicProtocol extends Protocol {
@@ -82,13 +86,12 @@ public class VanillaClassicProtocol extends Protocol {
 	}
 
 	@Override
-	public Message getIntroductionMessage(String playerName) {
-		// TODO Auto-generated method stub
-		return null;
+	public void initializeSession(Session session) {
+		session.setNetworkSynchronizer(new VanillaClassicSynchronizer(session));
 	}
 
 	@Override
-	public void initializeSession(Session session) {
-		session.setNetworkSynchronizer(new VanillaClassicSynchronizer(session));
+	public Message getIntroductionMessage(String playerName, InetSocketAddress addr) {
+		return new IdentificationMessage((byte)0x07, VanillaClassicConfiguration.SERVER_NAME.toString(), VanillaClassicConfiguration.MOTD.toString(), (byte)0x00);
 	}
 }
