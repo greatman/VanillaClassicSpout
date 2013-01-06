@@ -35,6 +35,7 @@ import org.spout.api.Spout;
 import org.spout.api.event.player.PlayerConnectEvent;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Session;
+import org.spout.api.protocol.Session.State;
 
 import com.greatmancode.vanillaclassic.VanillaClassicPlugin;
 import com.greatmancode.vanillaclassic.configuration.VanillaClassicConfiguration;
@@ -55,6 +56,7 @@ public final class IdentificationHandler extends MessageHandler<IdentificationMe
 			System.out.println("User is valid. Let's roll!");
 			if (PlayerConnectEvent.getHandlerList().getRegisteredListeners().length > 0) {
 				Spout.getEventManager().callEvent(new PlayerConnectEvent(session, message.getUsernameOrServerName()));
+				session.setState(State.GAME);
 				System.out.println("Sending auth notice.");
 				session.send(false, new IdentificationMessage((byte) 0x07, VanillaClassicConfiguration.SERVER_NAME.getString(), VanillaClassicConfiguration.SERVER_NAME.getString(), (byte) 0x00)); // TODO: Get the real OP status
 				System.out.println("Sent!");

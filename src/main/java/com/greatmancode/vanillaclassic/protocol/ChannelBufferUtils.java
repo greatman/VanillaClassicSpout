@@ -51,10 +51,10 @@ public final class ChannelBufferUtils {
 			byte[] string = str.getBytes("US-ASCII");
 			byte[] newString = new byte[STRING_LENGTH];
 			for (int i = 0; i < newString.length; i++) {
-				if (string.length < i) {
-					newString[i] = 0x20;
-				} else {
+				if (i < string.length) {
 					newString[i] = string[i];
+				} else {
+					newString[i] = 0x20;
 				}
 			}
 			buf.writeBytes(newString);

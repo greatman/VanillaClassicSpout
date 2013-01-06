@@ -71,7 +71,7 @@ public class VanillaClassicProtocol extends Protocol {
 
 	@Override
 	public Message getKickMessage(ChatArguments message) {
-		return new DisconnectPlayerMessage(message.toString());
+		return new DisconnectPlayerMessage(message.asString());
 	}
 
 	@Override
