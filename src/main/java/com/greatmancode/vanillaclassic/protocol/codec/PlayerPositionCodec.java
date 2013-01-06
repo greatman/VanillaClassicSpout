@@ -36,7 +36,7 @@ import com.greatmancode.vanillaclassic.protocol.msg.PositionMessage;
 
 public final class PlayerPositionCodec extends MessageCodec<PositionMessage> {
 	public PlayerPositionCodec() {
-		super(PositionMessage.class, 0x09);
+		super(PositionMessage.class, 0x08);
 	}
 
 	@Override

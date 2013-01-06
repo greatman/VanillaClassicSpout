@@ -79,7 +79,7 @@ public class VanillaClassicProtocol extends Protocol {
 		if (command.getPreferredName().equals("kick")) {
 			return getKickMessage(args);
 		} else if (command.getPreferredName().equals("say")) {
-			return new MessageMessage((short) 0, args.asString() + "\u00a7r"); // The reset text is a workaround for a change in 1.3 -- Remove if fixed
+			return new MessageMessage((short) 0, args.asString()); // The reset text is a workaround for a change in 1.3 -- Remove if fixed
 		} else {
 			return new MessageMessage((short) 0, '/' + command.getPreferredName() + ' ' + args.asString());
 		}

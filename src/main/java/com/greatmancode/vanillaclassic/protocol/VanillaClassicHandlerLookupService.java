@@ -29,8 +29,12 @@ package com.greatmancode.vanillaclassic.protocol;
 import org.spout.api.protocol.HandlerLookupService;
 
 import com.greatmancode.vanillaclassic.protocol.handler.IdentificationHandler;
+import com.greatmancode.vanillaclassic.protocol.handler.PlayerMessageHandler;
+import com.greatmancode.vanillaclassic.protocol.handler.PlayerPositionHandler;
 import com.greatmancode.vanillaclassic.protocol.handler.SetBlockHandler;
 import com.greatmancode.vanillaclassic.protocol.msg.IdentificationMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.MessageMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.PositionMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.SetBlockClientMessage;
 
 public class VanillaClassicHandlerLookupService extends HandlerLookupService {
@@ -38,6 +42,8 @@ public class VanillaClassicHandlerLookupService extends HandlerLookupService {
 		try {
 			bind(IdentificationMessage.class, IdentificationHandler.class);
 			bind(SetBlockClientMessage.class, SetBlockHandler.class);
+			bind(PositionMessage.class, PlayerPositionHandler.class);
+			bind(MessageMessage.class, PlayerMessageHandler.class);
 		} catch (Exception ex) {
 			throw new ExceptionInInitializerError(ex);
 		}
