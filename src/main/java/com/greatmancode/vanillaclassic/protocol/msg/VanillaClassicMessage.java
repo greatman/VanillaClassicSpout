@@ -33,4 +33,10 @@ public class VanillaClassicMessage implements Message {
 	public int getChannelId() {
 		return DEFAULT_CHANNEL;
 	}
+
+	@Override
+	public boolean isAsync() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

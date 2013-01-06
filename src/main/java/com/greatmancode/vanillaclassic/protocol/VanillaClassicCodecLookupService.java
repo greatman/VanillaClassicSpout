@@ -45,6 +45,7 @@ import com.greatmancode.vanillaclassic.protocol.codec.UpdateUserTypeCodec;
 
 public class VanillaClassicCodecLookupService extends CodecLookupService {
 	public VanillaClassicCodecLookupService() {
+		super(512);
 		try {
 			/* 0x00 */
 			bind(IdentificationCodec.class);

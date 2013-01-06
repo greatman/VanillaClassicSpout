@@ -27,6 +27,7 @@
 package com.greatmancode.vanillaclassic.protocol.handler;
 
 import org.spout.api.geo.cuboid.Block;
+import org.spout.api.material.BlockMaterial;
 import org.spout.api.material.Material;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Session;
@@ -52,7 +53,7 @@ public final class SetBlockHandler extends MessageHandler<SetBlockClientMessage>
 				Material mat = VanillaClassicMaterials.getMaterialFromID(message.getBlockType());
 				if (mat != null) {
 					//Everything is good! Let's place the block.
-					block.setMaterial(mat);
+					block.setMaterial((BlockMaterial) mat);
 				}
 			}
 		}
