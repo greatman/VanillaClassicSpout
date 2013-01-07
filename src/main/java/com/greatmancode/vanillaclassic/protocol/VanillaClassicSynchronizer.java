@@ -29,21 +29,30 @@ package com.greatmancode.vanillaclassic.protocol;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.zip.GZIPOutputStream;
 
+import org.spout.api.entity.Entity;
+import org.spout.api.entity.Player;
 import org.spout.api.geo.World;
+import org.spout.api.geo.cuboid.Chunk;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.material.BlockMaterial;
+import org.spout.api.math.IntVector3;
 import org.spout.api.math.Quaternion;
 import org.spout.api.protocol.NetworkSynchronizer;
 import org.spout.api.protocol.Session;
 import org.spout.api.protocol.event.ProtocolEventListener;
+import org.spout.api.util.FlatIterator;
 
 import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
+import com.greatmancode.vanillaclassic.protocol.msg.DespawnPlayerMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelDataChunkMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelFinalizeMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelInitializeMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.PositionMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.SetBlockServerMessage;
+import com.greatmancode.vanillaclassic.protocol.msg.SpawnPlayerMessage;
 
 /**
  * Synchronizes the game between multiple classic clients
@@ -63,7 +72,7 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 		session.send(false, new LevelInitializeMessage());
 		byte[] blocks = new byte[WORLD_SIZE * WORLD_SIZE * WORLD_SIZE];
 		for (int x = 0; x <= WORLD_SIZE; x++) {
-			for (int y = 0; y <= WORLD_SIZE; y++) {
+			for (int y = 0; y <= 30; y++) {
 				for (int z = 0; z <= WORLD_SIZE; z++) {
 					if (world.getBlock(x,y,z).getMaterial().equals(BlockMaterial.AIR)) {
 						blocks[coordsToBlockIndex(x, y, z)] = 0;
@@ -113,7 +122,39 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 		session.getPlayer().getTransform().setPosition(new Point(world, 50, 100, 50));
 	}
 
-	public static int coordsToBlockIndex(int x, int y, int z) {
+	
+	@Override
+	public void updateBlock(Chunk chunk, int x, int y, int z, BlockMaterial material, short data) {
+		short id;
+		if (material.equals(BlockMaterial.AIR)) {
+			id = 0;
+		} else {
+			id = ((ClassicBlockMaterial) material).getClassicId();
+		}
+		x += chunk.getBlockX();
+		y += chunk.getBlockY();
+		z += chunk.getBlockZ();
+		if (y >= 0 && y < chunk.getWorld().getHeight()) {
+			SetBlockServerMessage SBSM = new SetBlockServerMessage((short)x,(short)y,(short)z, (byte) id);
+			session.send(false, SBSM);
+		}
+	}
+
+	
+	public void syncEntity(Entity e, boolean spawn, boolean destroy, boolean update) {
+		super.syncEntity(e, spawn, destroy, update);
+		if (spawn) {
+			SpawnPlayerMessage SPM = new SpawnPlayerMessage((byte)e.getId(), ((Player) e).getName(), (short)e.getTransform().getPosition().getX(), (short)e.getTransform().getPosition().getY(), (short)e.getTransform().getPosition().getZ(), (byte)e.getTransform().getYaw(), (byte)e.getTransform().getPitch());
+			session.send(false, SPM);
+		} else if (destroy) {
+			DespawnPlayerMessage DPM = new DespawnPlayerMessage((byte) e.getId());
+			session.send(false, DPM);
+		} else if (update) {
+			PositionMessage PM = new PositionMessage((byte)e.getId(), (short)e.getTransform().getPosition().getX(), (short)e.getTransform().getPosition().getY(), (short)e.getTransform().getPosition().getZ(), (byte)e.getTransform().getYaw(), (byte)e.getTransform().getPitch());
+			session.send(false, PM);
+		}
+	}
+	private static int coordsToBlockIndex(int x, int y, int z) {
 		if (x < 0 || y < 0 || z < 0 || x > WORLD_SIZE || y > WORLD_SIZE || z > WORLD_SIZE)
 			return -1;
 

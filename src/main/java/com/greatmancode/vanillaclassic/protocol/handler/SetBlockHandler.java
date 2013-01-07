@@ -27,11 +27,14 @@
 package com.greatmancode.vanillaclassic.protocol.handler;
 
 import org.spout.api.geo.cuboid.Block;
-import org.spout.api.material.BlockMaterial;
 import org.spout.api.material.Material;
+import org.spout.api.material.Placeable;
+import org.spout.api.material.block.BlockFace;
+import org.spout.api.math.Vector3;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Session;
 
+import com.greatmancode.vanillaclassic.cause.PlayerPlacementCause;
 import com.greatmancode.vanillaclassic.material.VanillaClassicMaterials;
 import com.greatmancode.vanillaclassic.protocol.msg.SetBlockClientMessage;
 
@@ -46,14 +49,17 @@ public final class SetBlockHandler extends MessageHandler<SetBlockClientMessage>
 		short y = message.getY();
 		short z = message.getZ();
 		//Adding a block
-		if (message.getMode() == 0x00) {
+		if (message.getMode() == 0x01) {
+			
 			Block block = session.getPlayer().getWorld().getBlock(x, y, z);
 			if (block.getMaterial().equals(VanillaClassicMaterials.AIR)) {
 				//We check if it's a valid block ID.
-				Material mat = VanillaClassicMaterials.getMaterialFromID(message.getBlockType());
-				if (mat != null) {
+				
+				Placeable toPlace = (Placeable) VanillaClassicMaterials.getMaterialFromID(message.getBlockType());
+				
+				if (toPlace != null) {
 					//Everything is good! Let's place the block.
-					block.setMaterial((BlockMaterial) mat);
+					toPlace.onPlacement(block, (short) 0, BlockFace.NORTH, Vector3.ONE, false, new PlayerPlacementCause(session.getPlayer(), (Material) toPlace, block));
 				}
 			}
 		}
@@ -62,8 +68,8 @@ public final class SetBlockHandler extends MessageHandler<SetBlockClientMessage>
 			Block block = session.getPlayer().getWorld().getBlock(x, y, z);
 			//We don't want to remove air from the map..
 			if (!block.getMaterial().equals(VanillaClassicMaterials.AIR)) {
-				//TODO: Probably need to use onPlacement for this..
-				block.setMaterial(VanillaClassicMaterials.AIR);
+				Placeable toPlace = (Placeable) VanillaClassicMaterials.AIR;
+				toPlace.onPlacement(block, (short) 0, BlockFace.NORTH, Vector3.ONE, false, new PlayerPlacementCause(session.getPlayer(), (Material) toPlace, block));
 			}
 		}
 	}
