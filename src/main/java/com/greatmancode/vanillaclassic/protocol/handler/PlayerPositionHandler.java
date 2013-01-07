@@ -39,7 +39,7 @@ public final class PlayerPositionHandler extends MessageHandler<PositionMessage>
 	public void handleServer(Session session, PositionMessage message)  {
 		Player pl = session.getPlayer();
 //		if (pl.getTransform().getPosition().getX() != message.getX() && pl.getTransform().getPosition().getY() != message.getY() && pl.getTransform().getPosition().getZ() != message.getZ()) {
-//			System.out.println(message.getX() + ":" + message.getY() + ":" + message.getZ());
+			System.out.println(message.getX() + ":" + message.getY() + ":" + message.getZ());
 //		}
 		
 		//pl.getTransform().setPosition(new Point(pl.getWorld(), message.getX(), message.getY(), message.getZ()));

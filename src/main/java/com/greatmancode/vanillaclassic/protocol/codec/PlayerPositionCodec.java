@@ -42,9 +42,9 @@ public final class PlayerPositionCodec extends MessageCodec<PositionMessage> {
 	@Override
 	public PositionMessage decode(ChannelBuffer buffer) throws IOException {
 		short playerID = buffer.readUnsignedByte();
-		short x = buffer.readShort();
-		short y = buffer.readShort();
-		short z = buffer.readShort();
+		short x = (short) (buffer.readShort() / 32);
+		short y = (short) (buffer.readShort() / 32);
+		short z = (short) (buffer.readShort() / 32);
 		byte yaw = buffer.readByte();
 		byte pitch = buffer.readByte();
 		
@@ -55,9 +55,9 @@ public final class PlayerPositionCodec extends MessageCodec<PositionMessage> {
 	public ChannelBuffer encode(PositionMessage message) throws IOException {
 		ChannelBuffer buffer = ChannelBuffers.buffer(9);
 		buffer.writeByte(message.getPlayerID());
-		buffer.writeShort(message.getX());
-		buffer.writeShort(message.getY());
-		buffer.writeShort(message.getZ());
+		buffer.writeShort(message.getX() * 32);
+		buffer.writeShort(message.getY() * 32);
+		buffer.writeShort(message.getZ() * 32);
 		buffer.writeByte(message.getYaw());
 		buffer.writeByte(message.getPitch());
 		return buffer;

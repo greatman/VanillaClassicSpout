@@ -49,23 +49,22 @@ import com.greatmancode.vanillaclassic.protocol.msg.PositionMessage;
  * Synchronizes the game between multiple classic clients
  */
 public class VanillaClassicSynchronizer extends NetworkSynchronizer implements ProtocolEventListener {
+	private static final int WORLD_SIZE = 500;
 	public VanillaClassicSynchronizer(Session session) {
 		super(session, 2);
 	}
 
 	protected void sendPosition(Point p, Quaternion rot) {
-		System.out.println("SENT THE POSITION");
-		System.out.println(p);
 		session.send(false, new PositionMessage((short) -1, (short)p.getX(), (short) p.getY(), (short)p.getZ(), (byte) rot.getYaw(), (byte) rot.getPitch()));
 	}
 	
 	protected void worldChanged(World world) {
 		System.out.println("CHANGING WORLD");
 		session.send(false, new LevelInitializeMessage());
-		byte[] blocks = new byte[500 * 500 * 500];
-		for (int x = 0; x <= 500; x++) {
-			for (int y = 0; y <= 30; y++) {
-				for (int z = 0; z <= 500; z++) {
+		byte[] blocks = new byte[WORLD_SIZE * WORLD_SIZE * WORLD_SIZE];
+		for (int x = 0; x <= WORLD_SIZE; x++) {
+			for (int y = 0; y <= WORLD_SIZE; y++) {
+				for (int z = 0; z <= WORLD_SIZE; z++) {
 					if (world.getBlock(x,y,z).getMaterial().equals(BlockMaterial.AIR)) {
 						blocks[coordsToBlockIndex(x, y, z)] = 0;
 					} else {
@@ -74,7 +73,6 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 					
 				}
 			}
-			System.out.println(x);
 		}
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -94,7 +92,6 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 			double sent = 0;
 
 			for (int chunkStart = 0; chunkStart < data.length; chunkStart += 1024) {
-				System.out.println("Sending chunk");
 				byte[] chunkData = new byte[1024];
 
 				short length = 1024;
@@ -110,22 +107,16 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Sending levelfinalize");
-		session.send(false, new LevelFinalizeMessage((short)500,(short)500,(short)500));
-		System.out.println("Sending position");
+		session.send(false, new LevelFinalizeMessage((short)WORLD_SIZE,(short)WORLD_SIZE,(short)WORLD_SIZE));
 		
 		Point spawnPoint = world.getSpawnPoint().getPosition();
-		session.getPlayer().getTransform().setPosition(spawnPoint);
-		//session.send(false, new PositionMessage((short)0,(short)spawnPoint.getX(),(short)spawnPoint.getY(),(short)spawnPoint.getZ(),(byte)0,(byte)0));
-		//System.out.println(session.getPlayer().getTransform().getPosition());
-		System.out.println("Sent position");
-		System.out.println("worldChanged done");
+		session.getPlayer().getTransform().setPosition(new Point(world, 50, 100, 50));
 	}
 
 	public static int coordsToBlockIndex(int x, int y, int z) {
-		if (x < 0 || y < 0 || z < 0 || x > 500 || y > 500 || z > 500)
+		if (x < 0 || y < 0 || z < 0 || x > WORLD_SIZE || y > WORLD_SIZE || z > WORLD_SIZE)
 			return -1;
 
-		return x + (z * 500) + (y * 500 * 500);
+		return x + (z * WORLD_SIZE) + (y * WORLD_SIZE * WORLD_SIZE);
 	}
 }
