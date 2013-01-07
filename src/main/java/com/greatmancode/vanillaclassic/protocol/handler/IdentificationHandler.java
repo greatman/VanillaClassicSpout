@@ -44,8 +44,6 @@ import com.greatmancode.vanillaclassic.protocol.msg.IdentificationMessage;
 public final class IdentificationHandler extends MessageHandler<IdentificationMessage> {
 	@Override
 	public void handleServer(Session session, IdentificationMessage message) {
-		System.out.println("We received a player!");
-		System.out.println(md5(VanillaClassicPlugin.SALT + message.getUsernameOrServerName()));
 		
 		if (message.getProtocolVersion() != VanillaClassicPlugin.PROTOCOL_VERSION) {
 			session.disconnect("Invalid protocol ID! Are you updated?");
@@ -53,14 +51,13 @@ public final class IdentificationHandler extends MessageHandler<IdentificationMe
 		}
 		if (message.getVerificationKeyOrServerMOTD().equals(md5(VanillaClassicPlugin.SALT + message.getUsernameOrServerName()))) {
 			// User is valid. Let's send our response
-			System.out.println("User is valid. Let's roll!");
 			if (PlayerConnectEvent.getHandlerList().getRegisteredListeners().length > 0) {
 				Spout.getEventManager().callEvent(new PlayerConnectEvent(session, message.getUsernameOrServerName()));
 				session.setState(State.GAME);
-				System.out.println("Sending auth notice.");
 				session.send(false, new IdentificationMessage((byte) 0x07, VanillaClassicConfiguration.SERVER_NAME.getString(), VanillaClassicConfiguration.SERVER_NAME.getString(), (byte) 0x00)); // TODO: Get the real OP status
-				System.out.println("Sent!");
 			}
+		} else {
+			session.disconnect("Invalid account! Are you connected to minecraft.net?");
 		}
 	}
 
