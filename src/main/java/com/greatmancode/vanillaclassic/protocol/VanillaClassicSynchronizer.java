@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
+ * Copyright (c) 2012 - 2013, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -31,16 +31,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
 
-import org.spout.api.event.EventHandler;
 import org.spout.api.geo.World;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.material.BlockMaterial;
-import org.spout.api.protocol.Message;
+import org.spout.api.math.Quaternion;
 import org.spout.api.protocol.NetworkSynchronizer;
 import org.spout.api.protocol.Session;
 import org.spout.api.protocol.event.ProtocolEventListener;
 
-import com.greatmancode.vanillaclassic.event.PlayerPositionEvent;
 import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelDataChunkMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelFinalizeMessage;
@@ -55,13 +53,19 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 		super(session, 2);
 	}
 
+	protected void sendPosition(Point p, Quaternion rot) {
+		System.out.println("SENT THE POSITION");
+		System.out.println(p);
+		session.send(false, new PositionMessage((short) -1, (short)p.getX(), (short) p.getY(), (short)p.getZ(), (byte) rot.getYaw(), (byte) rot.getPitch()));
+	}
+	
 	protected void worldChanged(World world) {
 		System.out.println("CHANGING WORLD");
 		session.send(false, new LevelInitializeMessage());
-		byte[] blocks = new byte[100 * 100 * 100];
-		for (int x = 0; x <= 100; x++) {
+		byte[] blocks = new byte[500 * 500 * 500];
+		for (int x = 0; x <= 500; x++) {
 			for (int y = 0; y <= 30; y++) {
-				for (int z = 0; z <= 100; z++) {
+				for (int z = 0; z <= 500; z++) {
 					if (world.getBlock(x,y,z).getMaterial().equals(BlockMaterial.AIR)) {
 						blocks[coordsToBlockIndex(x, y, z)] = 0;
 					} else {
@@ -70,6 +74,7 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 					
 				}
 			}
+			System.out.println(x);
 		}
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -106,24 +111,21 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 			e.printStackTrace();
 		}
 		System.out.println("Sending levelfinalize");
-		session.send(false, new LevelFinalizeMessage((short)100,(short)100,(short)100));
+		session.send(false, new LevelFinalizeMessage((short)500,(short)500,(short)500));
 		System.out.println("Sending position");
 		
 		Point spawnPoint = world.getSpawnPoint().getPosition();
-		session.send(false, new PositionMessage((short)0,(short)spawnPoint.getX(),(short)spawnPoint.getY(),(short)spawnPoint.getZ(),(byte)0,(byte)0));
+		session.getPlayer().getTransform().setPosition(spawnPoint);
+		//session.send(false, new PositionMessage((short)0,(short)spawnPoint.getX(),(short)spawnPoint.getY(),(short)spawnPoint.getZ(),(byte)0,(byte)0));
+		//System.out.println(session.getPlayer().getTransform().getPosition());
 		System.out.println("Sent position");
 		System.out.println("worldChanged done");
 	}
 
 	public static int coordsToBlockIndex(int x, int y, int z) {
-		if (x < 0 || y < 0 || z < 0 || x > 100 || y > 100 || z > 100)
+		if (x < 0 || y < 0 || z < 0 || x > 500 || y > 500 || z > 500)
 			return -1;
 
-		return x + (z * 100) + (y * 100 * 100);
-	}
-	
-	@EventHandler
-	public Message onPlayerPosition(PlayerPositionEvent event) {
-		return new PositionMessage((short) event.getPlayer().getId(), (short)event.getPosition().getX(), (short) event.getPosition().getY(), (short)event.getPosition().getZ(), (byte) 0, (byte) 0);
+		return x + (z * 500) + (y * 500 * 500);
 	}
 }

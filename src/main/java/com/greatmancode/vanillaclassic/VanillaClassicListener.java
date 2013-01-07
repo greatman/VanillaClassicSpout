@@ -24,14 +24,18 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package com.greatmancode.vanillaclassic.material.basic;
+package com.greatmancode.vanillaclassic;
 
-import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
+import org.spout.api.event.EventHandler;
+import org.spout.api.event.Listener;
+import org.spout.api.event.Order;
+import org.spout.api.event.Result;
+import org.spout.api.event.server.permissions.PermissionNodeEvent;
 
-public class DoubleSlab extends ClassicBlockMaterial {
+public class VanillaClassicListener implements Listener {
 
-	public DoubleSlab() {
-		super("Double Slab", 43);
+	@EventHandler(order = Order.EARLIEST)
+	public void onPermissionNode(PermissionNodeEvent event) {
+		event.setResult(Result.ALLOW);
 	}
-
 }

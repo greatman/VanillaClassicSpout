@@ -139,7 +139,7 @@
 						<url>${project.organization.url}</url>
 						<license>SpoutDev License Version 1</license>
 						<licenseUrl>http://www.spout.org/SpoutDevLicenseV1.txt</licenseUrl>
-						<copyright>Copyright (c) 2012, ${project.organization.name}</copyright>
+						<copyright>Copyright (c) 2012 - 2013, ${project.organization.name}</copyright>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>

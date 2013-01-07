@@ -1,7 +1,7 @@
 /*
  * This file is part of VanillaClassic.
  *
- * Copyright (c) 2012, Greatman <http://www.github.com/greatman/>
+ * Copyright (c) 2012 - 2013, Greatman <http://www.github.com/greatman/>
  * VanillaClassic is licensed under the SpoutDev License Version 1.
  *
  * VanillaClassic is free software: you can redistribute it and/or modify
@@ -76,7 +76,7 @@ public class VanillaClassicPlugin extends CommonPlugin {
 		if (getEngine().debugMode() || getEngine().getPlatform() == Platform.SERVER) {
 			setupWorlds();
 		}
-		
+		getEngine().getEventManager().registerEvents(new VanillaClassicListener(), this);
 		if (getEngine().getPlatform() == Platform.SERVER) {
 			//Find what is our IP/Port
 			List<PortBinding> ipList = ((Server)getEngine()).getBoundAddresses();
@@ -110,7 +110,7 @@ public class VanillaClassicPlugin extends CommonPlugin {
 				}
 			}, 0, 45, TimeUnit.SECONDS);
 		}
-		
+
 		getLogger().info("v" + getDescription().getVersion() + " enabled. Protocol: " + getDescription().getData("protocol"));
 	}
 
