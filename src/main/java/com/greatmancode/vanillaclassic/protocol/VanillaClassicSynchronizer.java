@@ -33,13 +33,15 @@ import java.util.zip.GZIPOutputStream;
 
 import org.spout.api.event.EventHandler;
 import org.spout.api.geo.World;
+import org.spout.api.geo.discrete.Point;
+import org.spout.api.material.BlockMaterial;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.NetworkSynchronizer;
 import org.spout.api.protocol.Session;
 import org.spout.api.protocol.event.ProtocolEventListener;
 
 import com.greatmancode.vanillaclassic.event.PlayerPositionEvent;
-import com.greatmancode.vanillaclassic.material.VanillaClassicMaterials;
+import com.greatmancode.vanillaclassic.material.ClassicBlockMaterial;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelDataChunkMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelFinalizeMessage;
 import com.greatmancode.vanillaclassic.protocol.msg.LevelInitializeMessage;
@@ -60,15 +62,12 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 		for (int x = 0; x <= 100; x++) {
 			for (int y = 0; y <= 30; y++) {
 				for (int z = 0; z <= 100; z++) {
-					if (y == 0) {
-						blocks[coordsToBlockIndex(x, y, z)] = VanillaClassicMaterials.BEDROCK.getClassicId();
-					} else if (y <= 30 - 4) {
-						blocks[coordsToBlockIndex(x, y, z)] = VanillaClassicMaterials.STONE.getClassicId();
-					} else if (y <= 30 - 1) {
-						blocks[coordsToBlockIndex(x, y, z)] = VanillaClassicMaterials.DIRT.getClassicId();
-					} else if (y == 30) {
-						blocks[coordsToBlockIndex(x, y, z)] = VanillaClassicMaterials.GRASS.getClassicId();
+					if (world.getBlock(x,y,z).getMaterial().equals(BlockMaterial.AIR)) {
+						blocks[coordsToBlockIndex(x, y, z)] = 0;
+					} else {
+						blocks[coordsToBlockIndex(x, y, z)] = ((ClassicBlockMaterial) world.getBlock(x, y, z).getMaterial()).getClassicId();
 					}
+					
 				}
 			}
 		}
@@ -90,6 +89,7 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 			double sent = 0;
 
 			for (int chunkStart = 0; chunkStart < data.length; chunkStart += 1024) {
+				System.out.println("Sending chunk");
 				byte[] chunkData = new byte[1024];
 
 				short length = 1024;
@@ -105,8 +105,13 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Sending levelfinalize");
 		session.send(false, new LevelFinalizeMessage((short)100,(short)100,(short)100));
-		session.send(false, new PositionMessage((short)0,(short)31,(short)31,(short)31,(byte)0,(byte)0));
+		System.out.println("Sending position");
+		
+		Point spawnPoint = world.getSpawnPoint().getPosition();
+		session.send(false, new PositionMessage((short)0,(short)spawnPoint.getX(),(short)spawnPoint.getY(),(short)spawnPoint.getZ(),(byte)0,(byte)0));
+		System.out.println("Sent position");
 		System.out.println("worldChanged done");
 	}
 

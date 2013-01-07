@@ -42,7 +42,7 @@ public class WorldConfiguration extends YamlConfiguration {
 	public WorldConfiguration(File dataFolder) {
 		super(new File(dataFolder, "worlds.yml"));
 		//TODO: Allow the creation of sub-sections for configuration holders
-		NORMAL = get("world").setDefaults("normal", "flat");
+		NORMAL = get("world_classic").setDefaults("normal", "flat");
 	}
 
 	public Collection<WorldConfigurationNode> getAll() {

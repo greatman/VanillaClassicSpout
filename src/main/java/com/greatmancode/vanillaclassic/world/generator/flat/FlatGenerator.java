@@ -26,76 +26,34 @@
  */
 package com.greatmancode.vanillaclassic.world.generator.flat;
 
-import org.spout.api.generator.GeneratorPopulator;
-import org.spout.api.generator.Populator;
-import org.spout.api.geo.World;
-import org.spout.api.geo.cuboid.Chunk;
-import org.spout.api.geo.discrete.Point;
-import org.spout.api.util.cuboid.CuboidBlockMaterialBuffer;
-import org.spout.api.util.cuboid.CuboidShortBuffer;
+import java.util.Random;
 
+import org.spout.api.generator.LayeredWorldGenerator;
+import org.spout.api.geo.World;
+import org.spout.api.geo.discrete.Point;
 import com.greatmancode.vanillaclassic.material.VanillaClassicMaterials;
 import com.greatmancode.vanillaclassic.world.generator.VanillaClassicGenerator;
 
-public class FlatGenerator implements VanillaClassicGenerator {
-
-	private final int height;
-
+public class FlatGenerator extends LayeredWorldGenerator implements VanillaClassicGenerator {
 	public FlatGenerator(int height) {
-		this.height = height;
-	}
-
-	@Override
-	public void generate(CuboidBlockMaterialBuffer blockData, int chunkX, int chunkY, int chunkZ, World world) {
-		//Thanks DDoS
-		int x = chunkX << 4, z = chunkZ << 4;
-		for (int dx = x; dx < x + 16; ++dx) {
-			for (int dz = z; dz < z + 16; ++dz) {
-				final int startY = chunkY << Chunk.BLOCKS.BITS;
-				final int endY = Math.min(Chunk.BLOCKS.SIZE + startY, height);
-				for (int y = startY; y < endY; y++) {
-					if (y <= 0) {
-						blockData.set(dx, y, dz, VanillaClassicMaterials.BEDROCK);
-					} else if (y == height - 1) {
-						blockData.set(dx, y, dz, VanillaClassicMaterials.GRASS);
-					} else {
-						blockData.set(dx, y, dz, VanillaClassicMaterials.DIRT);
-					}
-				}
-			}
-		}
-
-	}
-
-	@Override
-	public Populator[] getPopulators() {
-		return new Populator[0];
-	}
-
-	@Override
-	public GeneratorPopulator[] getGeneratorPopulators() {
-		return new GeneratorPopulator[0];
+		this.setFloorLayer(VanillaClassicMaterials.BEDROCK);
+		this.addLayer(0, height - 1, VanillaClassicMaterials.DIRT);
+		this.stackLayer(1, VanillaClassicMaterials.GRASS);
 	}
 
 	@Override
 	public String getName() {
-		return "FlatGenerator";
+		return "VanillaFlat";
 	}
 
 	@Override
 	public Point getSafeSpawn(World world) {
-		return new Point(world, 0, height, 0);
-	}
-
-	@Override
-	public int[][] getSurfaceHeight(World world, int chunkX, int chunkZ) {
-		int[][] heights = new int[Chunk.BLOCKS.SIZE][Chunk.BLOCKS.SIZE];
-		for (int x = 0; x < Chunk.BLOCKS.SIZE; x++) {
-			for (int z = 0; z < Chunk.BLOCKS.SIZE; z++) {
-				heights[x][z] = height - 1;
-			}
+		final Random random = new Random();
+		final int x = 16 - random.nextInt(32);
+		final int z = 16 - random.nextInt(32);
+		int y = world.getHeight() - 1;
+		for (; !world.getBlockMaterial(x, y, z).isSolid(); y--) {
 		}
-		return heights;
+		return new Point(world, x, y + 1.5f, z);
 	}
-
 }
