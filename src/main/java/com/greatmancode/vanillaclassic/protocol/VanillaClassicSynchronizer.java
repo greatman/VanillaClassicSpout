@@ -58,7 +58,7 @@ import com.greatmancode.vanillaclassic.protocol.msg.SpawnPlayerMessage;
  * Synchronizes the game between multiple classic clients
  */
 public class VanillaClassicSynchronizer extends NetworkSynchronizer implements ProtocolEventListener {
-	private static final int WORLD_SIZE = 500;
+	private static final int WORLD_SIZE = 200;
 	public VanillaClassicSynchronizer(Session session) {
 		super(session, 2);
 	}
