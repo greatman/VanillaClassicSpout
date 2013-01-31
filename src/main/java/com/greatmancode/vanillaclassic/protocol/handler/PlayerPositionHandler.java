@@ -28,6 +28,8 @@ package com.greatmancode.vanillaclassic.protocol.handler;
 
 import org.spout.api.entity.Player;
 import org.spout.api.geo.discrete.Point;
+import org.spout.api.math.Quaternion;
+import org.spout.api.math.QuaternionMath;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Session;
 
@@ -38,9 +40,7 @@ public final class PlayerPositionHandler extends MessageHandler<PositionMessage>
 	@Override
 	public void handleServer(Session session, PositionMessage message)  {
 		Player pl = session.getPlayer();
-		
-		pl.getTransform().setPosition(new Point(pl.getWorld(), message.getX(), message.getY(), message.getZ()));
-		pl.getTransform().setPitch(message.getPitch());
-		pl.getTransform().setYaw(message.getYaw());
+		pl.getScene().setPosition(new Point(pl.getWorld(), message.getX(), message.getY(), message.getZ()));
+		pl.getScene().setRotation(QuaternionMath.rotation(message.getPitch(), message.getYaw(), 0));
 	}
 }

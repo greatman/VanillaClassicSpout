@@ -37,6 +37,7 @@ import org.spout.api.entity.Player;
 import org.spout.api.geo.World;
 import org.spout.api.geo.cuboid.Chunk;
 import org.spout.api.geo.discrete.Point;
+import org.spout.api.geo.discrete.Transform;
 import org.spout.api.material.BlockMaterial;
 import org.spout.api.math.IntVector3;
 import org.spout.api.math.Quaternion;
@@ -119,7 +120,7 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 		session.send(false, new LevelFinalizeMessage((short)WORLD_SIZE,(short)WORLD_SIZE,(short)WORLD_SIZE));
 		
 		Point spawnPoint = world.getSpawnPoint().getPosition();
-		session.getPlayer().getTransform().setPosition(new Point(world, 50, 100, 50));
+		session.getPlayer().getScene().setPosition(new Point(world, 50, 100, 50));
 	}
 
 	
@@ -141,16 +142,16 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 	}
 
 	
-	public void syncEntity(Entity e, boolean spawn, boolean destroy, boolean update) {
-		super.syncEntity(e, spawn, destroy, update);
+	public void syncEntity(Entity e, Transform liveTransform, boolean spawn, boolean destroy, boolean update) {
+		super.syncEntity(e, liveTransform, spawn, destroy, update);
 		if (spawn) {
-			SpawnPlayerMessage SPM = new SpawnPlayerMessage((byte)e.getId(), ((Player) e).getName(), (short)e.getTransform().getPosition().getX(), (short)e.getTransform().getPosition().getY(), (short)e.getTransform().getPosition().getZ(), (byte)e.getTransform().getYaw(), (byte)e.getTransform().getPitch());
+			SpawnPlayerMessage SPM = new SpawnPlayerMessage((byte)e.getId(), ((Player) e).getName(), (short)liveTransform.getPosition().getX(), (short)liveTransform.getPosition().getY(), (short)liveTransform.getPosition().getZ(), (byte)liveTransform.getRotation().getYaw(), (byte)liveTransform.getRotation().getPitch());
 			session.send(false, SPM);
 		} else if (destroy) {
 			DespawnPlayerMessage DPM = new DespawnPlayerMessage((byte) e.getId());
 			session.send(false, DPM);
 		} else if (update) {
-			PositionMessage PM = new PositionMessage((byte)e.getId(), (short)e.getTransform().getPosition().getX(), (short)e.getTransform().getPosition().getY(), (short)e.getTransform().getPosition().getZ(), (byte)e.getTransform().getYaw(), (byte)e.getTransform().getPitch());
+			PositionMessage PM = new PositionMessage((byte)e.getId(), (short)liveTransform.getPosition().getX(), (short)liveTransform.getPosition().getY(), (short)liveTransform.getPosition().getZ(), (byte)liveTransform.getRotation().getYaw(), (byte)liveTransform.getRotation().getPitch());
 			session.send(false, PM);
 		}
 	}
