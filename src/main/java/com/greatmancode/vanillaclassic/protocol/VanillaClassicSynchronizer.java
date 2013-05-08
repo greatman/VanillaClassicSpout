@@ -135,10 +135,8 @@ public class VanillaClassicSynchronizer extends NetworkSynchronizer implements P
 		x += chunk.getBlockX();
 		y += chunk.getBlockY();
 		z += chunk.getBlockZ();
-		if (y >= 0 && y < chunk.getWorld().getHeight()) {
-			SetBlockServerMessage SBSM = new SetBlockServerMessage((short)x,(short)y,(short)z, (byte) id);
-			session.send(false, SBSM);
-		}
+		SetBlockServerMessage SBSM = new SetBlockServerMessage((short)x,(short)y,(short)z, (byte) id);
+		session.send(false, SBSM);
 	}
 
 	

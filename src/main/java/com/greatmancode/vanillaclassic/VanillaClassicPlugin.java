@@ -41,6 +41,8 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import org.spout.api.Platform;
 import org.spout.api.Server;
 import org.spout.api.geo.World;
 import org.spout.api.geo.discrete.Point;
@@ -48,7 +50,6 @@ import org.spout.api.geo.discrete.Transform;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 import org.spout.api.plugin.CommonPlugin;
-import org.spout.api.plugin.Platform;
 import org.spout.api.protocol.PortBinding;
 import org.spout.api.protocol.Protocol;
 
